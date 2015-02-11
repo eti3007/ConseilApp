@@ -1,0 +1,60 @@
+﻿@model ConseilApp.Models.Recherche.PremiereListe
+@using ConseilApp.Helpers
+
+@if (Model.apteConseil != null)
+{
+    <table class="table table-striped table-bordered table-hover" data-validemessage="Accepter l&#146;aide de ">
+        <thead>
+            <tr>
+                <td>Pseudo</td>
+                <td>Nb demande reçu</td>
+                <td>Nb proposition faite</td>
+                <td>:) / :(</td>
+                <td>Nb photo habillé</td>
+                <td>Genre</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.apteConseil)
+            {
+                <tr class="row-Modal" data-identifier="@i.id" data-pseudo="@i.pseudo">
+                    <!-- Conseillers qui peuvent aider -->
+                    @*<td>@Html.LinkButtonForModal("recherche", i.pseudo, false)</td>*@
+                    <td>@i.pseudo</td>
+                    <td>@i.nbDemande</td>
+                    <td>@i.nbProposition</td>
+                    <td>@i.note</td>
+                    <td>@i.nbPhotoHabille</td>
+                    <td>@i.genre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model.attenteConseil != null)
+{
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <td>Pseudo</td>
+                <td>Nb photo vêtement</td>
+                <td>Nb photo habillé</td>
+                <td>Genre</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.attenteConseil)
+            {
+                <tr>
+                    <!-- Abonnés en attente de conseil -->
+                    <td>@Html.LinkButtonForModal("recherche", i.pseudo, false)</td>
+                    <td>@i.nbPhotoVetement</td>
+                    <td>@i.nbPhotoHabille</td>
+                    <td>@i.genre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else { <text>Aucune information !</text> }
+<div id="modalPopup"></div>

@@ -1,0 +1,1077 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ConseilDAL.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ConseilDALStoreContainer">
+          <EntitySet Name="Conseil" EntityType="ConseilDAL.Store.Conseil" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Habillage" EntityType="ConseilDAL.Store.Habillage" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notification" EntityType="ConseilDAL.Store.Notification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Personne" EntityType="ConseilDAL.Store.Personne" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Photo" EntityType="ConseilDAL.Store.Photo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PhotoHabillage" EntityType="ConseilDAL.Store.PhotoHabillage" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PhotoStyle" EntityType="ConseilDAL.Store.PhotoStyle" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StatutHistorique" EntityType="ConseilDAL.Store.StatutHistorique" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Style" EntityType="ConseilDAL.Store.Style" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SuiviTelecharge" EntityType="ConseilDAL.Store.SuiviTelecharge" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TypeParam" EntityType="ConseilDAL.Store.TypeParam" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="ConseilDAL.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Vetement" EntityType="ConseilDAL.Store.Vetement" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Conseil_PersonneConseille" Association="ConseilDAL.Store.FK_Conseil_PersonneConseille">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Conseil" EntitySet="Conseil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conseil_PersonneDemande" Association="ConseilDAL.Store.FK_Conseil_PersonneDemande">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Conseil" EntitySet="Conseil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conseil_Style" Association="ConseilDAL.Store.FK_Conseil_Style">
+            <End Role="Style" EntitySet="Style" />
+            <End Role="Conseil" EntitySet="Conseil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conseil_TypeParam" Association="ConseilDAL.Store.FK_Conseil_TypeParam">
+            <End Role="TypeParam" EntitySet="TypeParam" />
+            <End Role="Conseil" EntitySet="Conseil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Habillage_Conseil" Association="ConseilDAL.Store.FK_Habillage_Conseil">
+            <End Role="Conseil" EntitySet="Conseil" />
+            <End Role="Habillage" EntitySet="Habillage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Conseil" Association="ConseilDAL.Store.FK_Notification_Conseil">
+            <End Role="Conseil" EntitySet="Conseil" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Personne" Association="ConseilDAL.Store.FK_Notification_Personne">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_TypeParam" Association="ConseilDAL.Store.FK_Notification_TypeParam">
+            <End Role="TypeParam" EntitySet="TypeParam" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Personne" Association="ConseilDAL.Store.FK_Photo_Personne">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_TypeParam" Association="ConseilDAL.Store.FK_Photo_TypeParam">
+            <End Role="TypeParam" EntitySet="TypeParam" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Vetement" Association="ConseilDAL.Store.FK_Photo_Vetement">
+            <End Role="Vetement" EntitySet="Vetement" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoHabillage_Habillage" Association="ConseilDAL.Store.FK_PhotoHabillage_Habillage">
+            <End Role="Habillage" EntitySet="Habillage" />
+            <End Role="PhotoHabillage" EntitySet="PhotoHabillage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoHabillage_Photo" Association="ConseilDAL.Store.FK_PhotoHabillage_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="PhotoHabillage" EntitySet="PhotoHabillage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoStyle_Photo" Association="ConseilDAL.Store.FK_PhotoStyle_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="PhotoStyle" EntitySet="PhotoStyle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoStyle_Style" Association="ConseilDAL.Store.FK_PhotoStyle_Style">
+            <End Role="Style" EntitySet="Style" />
+            <End Role="PhotoStyle" EntitySet="PhotoStyle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatutHistorique_Personne" Association="ConseilDAL.Store.FK_StatutHistorique_Personne">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="StatutHistorique" EntitySet="StatutHistorique" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatutHistorique_Style" Association="ConseilDAL.Store.FK_StatutHistorique_Style">
+            <End Role="Style" EntitySet="Style" />
+            <End Role="StatutHistorique" EntitySet="StatutHistorique" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatutHistorique_TypeParam" Association="ConseilDAL.Store.FK_StatutHistorique_TypeParam">
+            <End Role="TypeParam" EntitySet="TypeParam" />
+            <End Role="StatutHistorique" EntitySet="StatutHistorique" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuiviTelecharge_Personne" Association="ConseilDAL.Store.FK_SuiviTelecharge_Personne">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="SuiviTelecharge" EntitySet="SuiviTelecharge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vetement_TypeParam" Association="ConseilDAL.Store.FK_Vetement_TypeParam">
+            <End Role="TypeParam" EntitySet="TypeParam" />
+            <End Role="Vetement" EntitySet="Vetement" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Conseil">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreation" Type="datetime" Nullable="false" />
+          <Property Name="DateLimite" Type="datetime" Nullable="false" />
+          <Property Name="DateAccepte" Type="datetime" />
+          <Property Name="DateRefuse" Type="datetime" />
+          <Property Name="DemandeurId" Type="int" Nullable="false" />
+          <Property Name="ConseillerId" Type="int" Nullable="false" />
+          <Property Name="StyleId" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Habillage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreation" Type="datetime" Nullable="false" />
+          <Property Name="Commentaire" Type="varchar" MaxLength="500" />
+          <Property Name="Note" Type="smallint" />
+          <Property Name="ConseilId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreation" Type="datetime" Nullable="false" />
+          <Property Name="Message" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="PersonneId" Type="int" />
+          <Property Name="ConseilId" Type="int" />
+        </EntityType>
+        <EntityType Name="Personne">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FBCode" Type="varchar" MaxLength="10" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+          <Property Name="Prenom" Type="varchar" MaxLength="150" />
+          <Property Name="Pseudo" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="500" />
+          <Property Name="Genre" Type="char" MaxLength="1" />
+          <Property Name="AfficheInfo" Type="bit" />
+          <Property Name="EnvoiEmail" Type="bit" />
+          <Property Name="MotPasse" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="VetementId" Type="int" />
+          <Property Name="PersonneId" Type="int" Nullable="false" />
+          <Property Name="DateTelecharge" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoHabillage">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+            <PropertyRef Name="HabillageId" />
+          </Key>
+          <Property Name="PhotoId" Type="int" Nullable="false" />
+          <Property Name="HabillageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoStyle">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+            <PropertyRef Name="StyleId" />
+          </Key>
+          <Property Name="PhotoId" Type="int" Nullable="false" />
+          <Property Name="StyleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatutHistorique">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PersonneId" Type="int" Nullable="false" />
+          <Property Name="StyleId" Type="int" Nullable="false" />
+          <Property Name="DateCreation" Type="datetime" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Style">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="varchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SuiviTelecharge">
+          <Key>
+            <PropertyRef Name="Jour" />
+            <PropertyRef Name="PersonneId" />
+            <PropertyRef Name="Compteur" />
+          </Key>
+          <Property Name="Jour" Type="datetime" Nullable="false" />
+          <Property Name="PersonneId" Type="int" Nullable="false" />
+          <Property Name="Compteur" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeParam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TypeId" Type="tinyint" Nullable="false" />
+          <Property Name="TypeLib" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ParamCode" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="ParamLib" Type="varchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="56" />
+        </EntityType>
+        <EntityType Name="Vetement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Conseil_PersonneConseille">
+          <End Role="Personne" Type="ConseilDAL.Store.Personne" Multiplicity="1" />
+          <End Role="Conseil" Type="ConseilDAL.Store.Conseil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conseil">
+              <PropertyRef Name="ConseillerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conseil_PersonneDemande">
+          <End Role="Personne" Type="ConseilDAL.Store.Personne" Multiplicity="1" />
+          <End Role="Conseil" Type="ConseilDAL.Store.Conseil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conseil">
+              <PropertyRef Name="DemandeurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conseil_Style">
+          <End Role="Style" Type="ConseilDAL.Store.Style" Multiplicity="1" />
+          <End Role="Conseil" Type="ConseilDAL.Store.Conseil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Style">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conseil">
+              <PropertyRef Name="StyleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conseil_TypeParam">
+          <End Role="TypeParam" Type="ConseilDAL.Store.TypeParam" Multiplicity="1" />
+          <End Role="Conseil" Type="ConseilDAL.Store.Conseil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeParam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conseil">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Habillage_Conseil">
+          <End Role="Conseil" Type="ConseilDAL.Store.Conseil" Multiplicity="1" />
+          <End Role="Habillage" Type="ConseilDAL.Store.Habillage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conseil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Habillage">
+              <PropertyRef Name="ConseilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Conseil">
+          <End Role="Conseil" Type="ConseilDAL.Store.Conseil" Multiplicity="0..1" />
+          <End Role="Notification" Type="ConseilDAL.Store.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conseil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="ConseilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Personne">
+          <End Role="Personne" Type="ConseilDAL.Store.Personne" Multiplicity="0..1" />
+          <End Role="Notification" Type="ConseilDAL.Store.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="PersonneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_TypeParam">
+          <End Role="TypeParam" Type="ConseilDAL.Store.TypeParam" Multiplicity="1" />
+          <End Role="Notification" Type="ConseilDAL.Store.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeParam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Personne">
+          <End Role="Personne" Type="ConseilDAL.Store.Personne" Multiplicity="1" />
+          <End Role="Photo" Type="ConseilDAL.Store.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PersonneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_TypeParam">
+          <End Role="TypeParam" Type="ConseilDAL.Store.TypeParam" Multiplicity="1" />
+          <End Role="Photo" Type="ConseilDAL.Store.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeParam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Vetement">
+          <End Role="Vetement" Type="ConseilDAL.Store.Vetement" Multiplicity="0..1" />
+          <End Role="Photo" Type="ConseilDAL.Store.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vetement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="VetementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoHabillage_Habillage">
+          <End Role="Habillage" Type="ConseilDAL.Store.Habillage" Multiplicity="1" />
+          <End Role="PhotoHabillage" Type="ConseilDAL.Store.PhotoHabillage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habillage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotoHabillage">
+              <PropertyRef Name="HabillageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoHabillage_Photo">
+          <End Role="Photo" Type="ConseilDAL.Store.Photo" Multiplicity="1" />
+          <End Role="PhotoHabillage" Type="ConseilDAL.Store.PhotoHabillage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotoHabillage">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoStyle_Photo">
+          <End Role="Photo" Type="ConseilDAL.Store.Photo" Multiplicity="1" />
+          <End Role="PhotoStyle" Type="ConseilDAL.Store.PhotoStyle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotoStyle">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoStyle_Style">
+          <End Role="Style" Type="ConseilDAL.Store.Style" Multiplicity="1" />
+          <End Role="PhotoStyle" Type="ConseilDAL.Store.PhotoStyle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Style">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotoStyle">
+              <PropertyRef Name="StyleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatutHistorique_Personne">
+          <End Role="Personne" Type="ConseilDAL.Store.Personne" Multiplicity="1" />
+          <End Role="StatutHistorique" Type="ConseilDAL.Store.StatutHistorique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatutHistorique">
+              <PropertyRef Name="PersonneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatutHistorique_Style">
+          <End Role="Style" Type="ConseilDAL.Store.Style" Multiplicity="1" />
+          <End Role="StatutHistorique" Type="ConseilDAL.Store.StatutHistorique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Style">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatutHistorique">
+              <PropertyRef Name="StyleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatutHistorique_TypeParam">
+          <End Role="TypeParam" Type="ConseilDAL.Store.TypeParam" Multiplicity="1" />
+          <End Role="StatutHistorique" Type="ConseilDAL.Store.StatutHistorique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeParam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatutHistorique">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuiviTelecharge_Personne">
+          <End Role="Personne" Type="ConseilDAL.Store.Personne" Multiplicity="1" />
+          <End Role="SuiviTelecharge" Type="ConseilDAL.Store.SuiviTelecharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SuiviTelecharge">
+              <PropertyRef Name="PersonneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vetement_TypeParam">
+          <End Role="TypeParam" Type="ConseilDAL.Store.TypeParam" Multiplicity="1" />
+          <End Role="Vetement" Type="ConseilDAL.Store.Vetement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeParam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vetement">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ConseilDAL" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ConseilEntitiesBis" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Conseils" EntityType="ConseilDAL.Conseil" />
+          <EntitySet Name="Habillages" EntityType="ConseilDAL.Habillage" />
+          <EntitySet Name="Notifications" EntityType="ConseilDAL.Notification" />
+          <EntitySet Name="Personnes" EntityType="ConseilDAL.Personne" />
+          <EntitySet Name="Photos" EntityType="ConseilDAL.Photo" />
+          <EntitySet Name="StatutHistoriques" EntityType="ConseilDAL.StatutHistorique" />
+          <EntitySet Name="Styles" EntityType="ConseilDAL.Style" />
+          <EntitySet Name="SuiviTelecharges" EntityType="ConseilDAL.SuiviTelecharge" />
+          <EntitySet Name="TypeParams" EntityType="ConseilDAL.TypeParam" />
+          <EntitySet Name="UserProfiles" EntityType="ConseilDAL.UserProfile" />
+          <EntitySet Name="Vetements" EntityType="ConseilDAL.Vetement" />
+          <AssociationSet Name="FK_Conseil_PersonneConseille" Association="ConseilDAL.FK_Conseil_PersonneConseille">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="Conseil" EntitySet="Conseils" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conseil_PersonneDemande" Association="ConseilDAL.FK_Conseil_PersonneDemande">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="Conseil" EntitySet="Conseils" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conseil_Style" Association="ConseilDAL.FK_Conseil_Style">
+            <End Role="Style" EntitySet="Styles" />
+            <End Role="Conseil" EntitySet="Conseils" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conseil_TypeParam" Association="ConseilDAL.FK_Conseil_TypeParam">
+            <End Role="TypeParam" EntitySet="TypeParams" />
+            <End Role="Conseil" EntitySet="Conseils" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Habillage_Conseil" Association="ConseilDAL.FK_Habillage_Conseil">
+            <End Role="Conseil" EntitySet="Conseils" />
+            <End Role="Habillage" EntitySet="Habillages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Conseil" Association="ConseilDAL.FK_Notification_Conseil">
+            <End Role="Conseil" EntitySet="Conseils" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Personne" Association="ConseilDAL.FK_Notification_Personne">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_TypeParam" Association="ConseilDAL.FK_Notification_TypeParam">
+            <End Role="TypeParam" EntitySet="TypeParams" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Personne" Association="ConseilDAL.FK_Photo_Personne">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatutHistorique_Personne" Association="ConseilDAL.FK_StatutHistorique_Personne">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="StatutHistorique" EntitySet="StatutHistoriques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuiviTelecharge_Personne" Association="ConseilDAL.FK_SuiviTelecharge_Personne">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="SuiviTelecharge" EntitySet="SuiviTelecharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_TypeParam" Association="ConseilDAL.FK_Photo_TypeParam">
+            <End Role="TypeParam" EntitySet="TypeParams" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Vetement" Association="ConseilDAL.FK_Photo_Vetement">
+            <End Role="Vetement" EntitySet="Vetements" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatutHistorique_Style" Association="ConseilDAL.FK_StatutHistorique_Style">
+            <End Role="Style" EntitySet="Styles" />
+            <End Role="StatutHistorique" EntitySet="StatutHistoriques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatutHistorique_TypeParam" Association="ConseilDAL.FK_StatutHistorique_TypeParam">
+            <End Role="TypeParam" EntitySet="TypeParams" />
+            <End Role="StatutHistorique" EntitySet="StatutHistoriques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vetement_TypeParam" Association="ConseilDAL.FK_Vetement_TypeParam">
+            <End Role="TypeParam" EntitySet="TypeParams" />
+            <End Role="Vetement" EntitySet="Vetements" />
+          </AssociationSet>
+          <AssociationSet Name="PhotoHabillage" Association="ConseilDAL.PhotoHabillage">
+            <End Role="Habillage" EntitySet="Habillages" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="PhotoStyle" Association="ConseilDAL.PhotoStyle">
+            <End Role="Photo" EntitySet="Photos" />
+            <End Role="Style" EntitySet="Styles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Conseil">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateLimite" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateAccepte" Type="DateTime" Precision="3" />
+          <Property Name="DateRefuse" Type="DateTime" Precision="3" />
+          <Property Name="DemandeurId" Type="Int32" Nullable="false" />
+          <Property Name="ConseillerId" Type="Int32" Nullable="false" />
+          <Property Name="StyleId" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Personne" Relationship="ConseilDAL.FK_Conseil_PersonneConseille" FromRole="Conseil" ToRole="Personne" />
+          <NavigationProperty Name="Personne1" Relationship="ConseilDAL.FK_Conseil_PersonneDemande" FromRole="Conseil" ToRole="Personne" />
+          <NavigationProperty Name="Style" Relationship="ConseilDAL.FK_Conseil_Style" FromRole="Conseil" ToRole="Style" />
+          <NavigationProperty Name="TypeParam" Relationship="ConseilDAL.FK_Conseil_TypeParam" FromRole="Conseil" ToRole="TypeParam" />
+          <NavigationProperty Name="Habillages" Relationship="ConseilDAL.FK_Habillage_Conseil" FromRole="Conseil" ToRole="Habillage" />
+          <NavigationProperty Name="Notifications" Relationship="ConseilDAL.FK_Notification_Conseil" FromRole="Conseil" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="Habillage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Commentaire" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="Note" Type="Int16" />
+          <Property Name="ConseilId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Conseil" Relationship="ConseilDAL.FK_Habillage_Conseil" FromRole="Habillage" ToRole="Conseil" />
+          <NavigationProperty Name="Photos" Relationship="ConseilDAL.PhotoHabillage" FromRole="Habillage" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="PersonneId" Type="Int32" />
+          <Property Name="ConseilId" Type="Int32" />
+          <NavigationProperty Name="Conseil" Relationship="ConseilDAL.FK_Notification_Conseil" FromRole="Notification" ToRole="Conseil" />
+          <NavigationProperty Name="Personne" Relationship="ConseilDAL.FK_Notification_Personne" FromRole="Notification" ToRole="Personne" />
+          <NavigationProperty Name="TypeParam" Relationship="ConseilDAL.FK_Notification_TypeParam" FromRole="Notification" ToRole="TypeParam" />
+        </EntityType>
+        <EntityType Name="Personne">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FBCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Nom" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Prenom" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Pseudo" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="Genre" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="AfficheInfo" Type="Boolean" />
+          <Property Name="EnvoiEmail" Type="Boolean" />
+          <Property Name="MotPasse" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Conseils" Relationship="ConseilDAL.FK_Conseil_PersonneConseille" FromRole="Personne" ToRole="Conseil" />
+          <NavigationProperty Name="Conseils1" Relationship="ConseilDAL.FK_Conseil_PersonneDemande" FromRole="Personne" ToRole="Conseil" />
+          <NavigationProperty Name="Notifications" Relationship="ConseilDAL.FK_Notification_Personne" FromRole="Personne" ToRole="Notification" />
+          <NavigationProperty Name="Photos" Relationship="ConseilDAL.FK_Photo_Personne" FromRole="Personne" ToRole="Photo" />
+          <NavigationProperty Name="StatutHistoriques" Relationship="ConseilDAL.FK_StatutHistorique_Personne" FromRole="Personne" ToRole="StatutHistorique" />
+          <NavigationProperty Name="SuiviTelecharges" Relationship="ConseilDAL.FK_SuiviTelecharge_Personne" FromRole="Personne" ToRole="SuiviTelecharge" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="VetementId" Type="Int32" />
+          <Property Name="PersonneId" Type="Int32" Nullable="false" />
+          <Property Name="DateTelecharge" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Personne" Relationship="ConseilDAL.FK_Photo_Personne" FromRole="Photo" ToRole="Personne" />
+          <NavigationProperty Name="TypeParam" Relationship="ConseilDAL.FK_Photo_TypeParam" FromRole="Photo" ToRole="TypeParam" />
+          <NavigationProperty Name="Vetement" Relationship="ConseilDAL.FK_Photo_Vetement" FromRole="Photo" ToRole="Vetement" />
+          <NavigationProperty Name="Habillages" Relationship="ConseilDAL.PhotoHabillage" FromRole="Photo" ToRole="Habillage" />
+          <NavigationProperty Name="Styles" Relationship="ConseilDAL.PhotoStyle" FromRole="Photo" ToRole="Style" />
+        </EntityType>
+        <EntityType Name="StatutHistorique">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonneId" Type="Int32" Nullable="false" />
+          <Property Name="StyleId" Type="Int32" Nullable="false" />
+          <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Personne" Relationship="ConseilDAL.FK_StatutHistorique_Personne" FromRole="StatutHistorique" ToRole="Personne" />
+          <NavigationProperty Name="Style" Relationship="ConseilDAL.FK_StatutHistorique_Style" FromRole="StatutHistorique" ToRole="Style" />
+          <NavigationProperty Name="TypeParam" Relationship="ConseilDAL.FK_StatutHistorique_TypeParam" FromRole="StatutHistorique" ToRole="TypeParam" />
+        </EntityType>
+        <EntityType Name="Style">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Conseils" Relationship="ConseilDAL.FK_Conseil_Style" FromRole="Style" ToRole="Conseil" />
+          <NavigationProperty Name="StatutHistoriques" Relationship="ConseilDAL.FK_StatutHistorique_Style" FromRole="Style" ToRole="StatutHistorique" />
+          <NavigationProperty Name="Photos" Relationship="ConseilDAL.PhotoStyle" FromRole="Style" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="SuiviTelecharge">
+          <Key>
+            <PropertyRef Name="Jour" />
+            <PropertyRef Name="PersonneId" />
+            <PropertyRef Name="Compteur" />
+          </Key>
+          <Property Name="Jour" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PersonneId" Type="Int32" Nullable="false" />
+          <Property Name="Compteur" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Personne" Relationship="ConseilDAL.FK_SuiviTelecharge_Personne" FromRole="SuiviTelecharge" ToRole="Personne" />
+        </EntityType>
+        <EntityType Name="TypeParam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeId" Type="Byte" Nullable="false" />
+          <Property Name="TypeLib" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ParamCode" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="ParamLib" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Conseils" Relationship="ConseilDAL.FK_Conseil_TypeParam" FromRole="TypeParam" ToRole="Conseil" />
+          <NavigationProperty Name="Notifications" Relationship="ConseilDAL.FK_Notification_TypeParam" FromRole="TypeParam" ToRole="Notification" />
+          <NavigationProperty Name="Photos" Relationship="ConseilDAL.FK_Photo_TypeParam" FromRole="TypeParam" ToRole="Photo" />
+          <NavigationProperty Name="StatutHistoriques" Relationship="ConseilDAL.FK_StatutHistorique_TypeParam" FromRole="TypeParam" ToRole="StatutHistorique" />
+          <NavigationProperty Name="Vetements" Relationship="ConseilDAL.FK_Vetement_TypeParam" FromRole="TypeParam" ToRole="Vetement" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vetement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Photos" Relationship="ConseilDAL.FK_Photo_Vetement" FromRole="Vetement" ToRole="Photo" />
+          <NavigationProperty Name="TypeParam" Relationship="ConseilDAL.FK_Vetement_TypeParam" FromRole="Vetement" ToRole="TypeParam" />
+        </EntityType>
+        <Association Name="FK_Conseil_PersonneConseille">
+          <End Role="Personne" Type="ConseilDAL.Personne" Multiplicity="1" />
+          <End Role="Conseil" Type="ConseilDAL.Conseil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conseil">
+              <PropertyRef Name="ConseillerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conseil_PersonneDemande">
+          <End Role="Personne" Type="ConseilDAL.Personne" Multiplicity="1" />
+          <End Role="Conseil" Type="ConseilDAL.Conseil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conseil">
+              <PropertyRef Name="DemandeurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conseil_Style">
+          <End Role="Style" Type="ConseilDAL.Style" Multiplicity="1" />
+          <End Role="Conseil" Type="ConseilDAL.Conseil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Style">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conseil">
+              <PropertyRef Name="StyleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conseil_TypeParam">
+          <End Role="TypeParam" Type="ConseilDAL.TypeParam" Multiplicity="1" />
+          <End Role="Conseil" Type="ConseilDAL.Conseil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeParam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conseil">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Habillage_Conseil">
+          <End Role="Conseil" Type="ConseilDAL.Conseil" Multiplicity="1" />
+          <End Role="Habillage" Type="ConseilDAL.Habillage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conseil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Habillage">
+              <PropertyRef Name="ConseilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Conseil">
+          <End Role="Conseil" Type="ConseilDAL.Conseil" Multiplicity="0..1" />
+          <End Role="Notification" Type="ConseilDAL.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conseil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="ConseilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Personne">
+          <End Role="Personne" Type="ConseilDAL.Personne" Multiplicity="0..1" />
+          <End Role="Notification" Type="ConseilDAL.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="PersonneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_TypeParam">
+          <End Role="TypeParam" Type="ConseilDAL.TypeParam" Multiplicity="1" />
+          <End Role="Notification" Type="ConseilDAL.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeParam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Personne">
+          <End Role="Personne" Type="ConseilDAL.Personne" Multiplicity="1" />
+          <End Role="Photo" Type="ConseilDAL.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PersonneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatutHistorique_Personne">
+          <End Role="Personne" Type="ConseilDAL.Personne" Multiplicity="1" />
+          <End Role="StatutHistorique" Type="ConseilDAL.StatutHistorique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatutHistorique">
+              <PropertyRef Name="PersonneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuiviTelecharge_Personne">
+          <End Role="Personne" Type="ConseilDAL.Personne" Multiplicity="1" />
+          <End Role="SuiviTelecharge" Type="ConseilDAL.SuiviTelecharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SuiviTelecharge">
+              <PropertyRef Name="PersonneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_TypeParam">
+          <End Role="TypeParam" Type="ConseilDAL.TypeParam" Multiplicity="1" />
+          <End Role="Photo" Type="ConseilDAL.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeParam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Vetement">
+          <End Role="Vetement" Type="ConseilDAL.Vetement" Multiplicity="0..1" />
+          <End Role="Photo" Type="ConseilDAL.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vetement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="VetementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatutHistorique_Style">
+          <End Role="Style" Type="ConseilDAL.Style" Multiplicity="1" />
+          <End Role="StatutHistorique" Type="ConseilDAL.StatutHistorique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Style">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatutHistorique">
+              <PropertyRef Name="StyleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatutHistorique_TypeParam">
+          <End Role="TypeParam" Type="ConseilDAL.TypeParam" Multiplicity="1" />
+          <End Role="StatutHistorique" Type="ConseilDAL.StatutHistorique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeParam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatutHistorique">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vetement_TypeParam">
+          <End Role="TypeParam" Type="ConseilDAL.TypeParam" Multiplicity="1" />
+          <End Role="Vetement" Type="ConseilDAL.Vetement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeParam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vetement">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PhotoHabillage">
+          <End Role="Habillage" Type="ConseilDAL.Habillage" Multiplicity="*" />
+          <End Role="Photo" Type="ConseilDAL.Photo" Multiplicity="*" />
+        </Association>
+        <Association Name="PhotoStyle">
+          <End Role="Photo" Type="ConseilDAL.Photo" Multiplicity="*" />
+          <End Role="Style" Type="ConseilDAL.Style" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ConseilDALStoreContainer" CdmEntityContainer="ConseilEntitiesBis">
+          <EntitySetMapping Name="Conseils">
+            <EntityTypeMapping TypeName="ConseilDAL.Conseil">
+              <MappingFragment StoreEntitySet="Conseil">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+                <ScalarProperty Name="DateLimite" ColumnName="DateLimite" />
+                <ScalarProperty Name="DateAccepte" ColumnName="DateAccepte" />
+                <ScalarProperty Name="DateRefuse" ColumnName="DateRefuse" />
+                <ScalarProperty Name="DemandeurId" ColumnName="DemandeurId" />
+                <ScalarProperty Name="ConseillerId" ColumnName="ConseillerId" />
+                <ScalarProperty Name="StyleId" ColumnName="StyleId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Habillages">
+            <EntityTypeMapping TypeName="ConseilDAL.Habillage">
+              <MappingFragment StoreEntitySet="Habillage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ConseilId" ColumnName="ConseilId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="ConseilDAL.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="PersonneId" ColumnName="PersonneId" />
+                <ScalarProperty Name="ConseilId" ColumnName="ConseilId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personnes">
+            <EntityTypeMapping TypeName="ConseilDAL.Personne">
+              <MappingFragment StoreEntitySet="Personne">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FBCode" ColumnName="FBCode" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Pseudo" ColumnName="Pseudo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="AfficheInfo" ColumnName="AfficheInfo" />
+                <ScalarProperty Name="EnvoiEmail" ColumnName="EnvoiEmail" />
+                <ScalarProperty Name="MotPasse" ColumnName="MotPasse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="ConseilDAL.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="VetementId" ColumnName="VetementId" />
+                <ScalarProperty Name="PersonneId" ColumnName="PersonneId" />
+                <ScalarProperty Name="DateTelecharge" ColumnName="DateTelecharge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatutHistoriques">
+            <EntityTypeMapping TypeName="ConseilDAL.StatutHistorique">
+              <MappingFragment StoreEntitySet="StatutHistorique">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonneId" ColumnName="PersonneId" />
+                <ScalarProperty Name="StyleId" ColumnName="StyleId" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Styles">
+            <EntityTypeMapping TypeName="ConseilDAL.Style">
+              <MappingFragment StoreEntitySet="Style">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuiviTelecharges">
+            <EntityTypeMapping TypeName="ConseilDAL.SuiviTelecharge">
+              <MappingFragment StoreEntitySet="SuiviTelecharge">
+                <ScalarProperty Name="Jour" ColumnName="Jour" />
+                <ScalarProperty Name="PersonneId" ColumnName="PersonneId" />
+                <ScalarProperty Name="Compteur" ColumnName="Compteur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeParams">
+            <EntityTypeMapping TypeName="ConseilDAL.TypeParam">
+              <MappingFragment StoreEntitySet="TypeParam">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeLib" ColumnName="TypeLib" />
+                <ScalarProperty Name="ParamCode" ColumnName="ParamCode" />
+                <ScalarProperty Name="ParamLib" ColumnName="ParamLib" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="ConseilDAL.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vetements">
+            <EntityTypeMapping TypeName="ConseilDAL.Vetement">
+              <MappingFragment StoreEntitySet="Vetement">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PhotoHabillage" TypeName="ConseilDAL.PhotoHabillage" StoreEntitySet="PhotoHabillage">
+            <EndProperty Name="Habillage">
+              <ScalarProperty Name="Id" ColumnName="HabillageId" />
+            </EndProperty>
+            <EndProperty Name="Photo">
+              <ScalarProperty Name="Id" ColumnName="PhotoId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PhotoStyle" TypeName="ConseilDAL.PhotoStyle" StoreEntitySet="PhotoStyle">
+            <EndProperty Name="Photo">
+              <ScalarProperty Name="Id" ColumnName="PhotoId" />
+            </EndProperty>
+            <EndProperty Name="Style">
+              <ScalarProperty Name="Id" ColumnName="StyleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

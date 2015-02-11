@@ -1,0 +1,17 @@
+﻿@using ConseilApp.Helpers
+
+@model List<string>
+
+@if (Model.Count>0)
+{
+    <ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
+     @foreach (string s in Model)
+     {
+         <li>
+             <div>
+                 @Html.Vignette(@Url.Content(@s),@s,"Supprimer")
+             </div>
+         </li>
+     }
+    </ul>
+}

@@ -1,0 +1,18 @@
+﻿@if (Request.IsAuthenticated) {
+    @Html.Action("ListeStyle", "Liste");
+}
+
+
+<script type="text/javascript">
+    $(function () {
+        $('select#Style option').each(function () {
+            $(this).bind("click", function () {
+                var url = '@Url.Action("MajStyleEnCours", "Liste")';
+                var val = $(this).val();                
+                $.get(url, { id: val }, function (data) {
+                    // A voir pour la suite si on est sur la page Proposition ou Demande de mettra à jour le contenu
+                });
+            });
+        });
+    });
+</script>

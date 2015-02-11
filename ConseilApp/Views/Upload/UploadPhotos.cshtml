@@ -1,0 +1,182 @@
+﻿@model ConseilApp.Models.UploadPhotoViewModel
+
+@{
+    ViewBag.Title = "Envoyez nous vos photos...";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                <h4>... de vêtements</h4>
+            </a>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <input type="hidden" id="hNbPhotosVetement" value="0" />
+
+                @using (Html.BeginForm("UploadPhotos", "Upload", FormMethod.Post, new { Id = "frmUploadVetement", enctype = "multipart/form-data" }))
+                {
+                <fieldset class="form-horizontal" id="fsVetement">
+                    @Html.HiddenFor(m => m.VetementValidation)
+
+                    <div class="control-group">
+                        @Html.Label("Style", new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.DropDownListFor(m => m.PhotoVetement.Style, Model.PhotoVetement.styleListe, "-- Votre choix --")
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(m => m.PhotoVetement.ModeAttente, new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.CheckBoxFor(m => m.PhotoVetement.ModeAttente)
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        @Html.Label("Type de vêtement", new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.DropDownListFor(m => m.PhotoVetement.Vetement, Model.PhotoVetement.vetementListe, "-- Votre choix --")
+                        </div>
+                    </div>
+
+                    <input type="file" title="Sélectionnez vos photos..." id="inputUploadVetement" name="UploadVetement" multiple accept="image/*" />
+                    
+                    <input id="valide" type="submit"
+                           style="width:0;height:0;padding:0;margin:0;top:-10px;left:-10px;border:none;position:absolute" />
+                </fieldset>
+                }
+
+                <div id="photosVetement"></div>
+            </div>
+        </div>
+    </div>
+    @if(Model.EstConseiller) {
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                <h4>... d'habillages</h4>
+            </a>
+        </div>
+        <div id="collapseTwo" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <input type="hidden" id="hNbPhotosHabillage" value="0" />
+
+                @using (Html.BeginForm("UploadPhotos", "Upload", FormMethod.Post, new { Id = "frmUploadHabillage", enctype = "multipart/form-data" }))
+                {
+                    <fieldset class="form-horizontal" id="fsHabillage">
+                        @Html.HiddenFor(m => m.VetementValidation)
+
+                        <div class="control-group">
+                            @Html.Label("Style", new { @class = "control-label" })
+                            <div class="controls">
+                                @Html.DropDownListFor(m => m.PhotoHabillage.Style, Model.PhotoHabillage.styleListe, "-- Votre choix --")
+                            </div>
+                        </div>
+
+                        <input type="file" title="Sélectionnez vos photos..." id="inputUploadHabillage" name="UploadHabillage" multiple accept="image/*" />
+
+                        <input id="valide" type="submit"
+                               style="width:0;height:0;padding:0;margin:0;top:-10px;left:-10px;border:none;position:absolute" />
+                    </fieldset>
+                }
+
+                <div id="photosHabillage"></div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+@section Scripts {
+    @Styles.Render("~/Content/SlideCss")
+    @Scripts.Render("~/bundles/InputFile")
+    @Scripts.Render("~/bundles/SlideJs")
+
+    <script type="text/javascript">
+        function ChargeImages(xstyle, xvetement) {
+            var url = '@Url.Action("AffichePhotosVetement", "Upload")';
+            var jqxhr = $.ajax({
+                cache: false,
+                type: "GET",
+                url: url,
+                data: { style: xstyle, vetement: xvetement }
+            })
+            .success(function (data) {
+                if (data == "\r\n")
+                    $('#photosVetement').html("Aucune photo disponible !");
+                else {
+                    $('#photosVetement').html(data);
+
+                    CarouselHorizontalSetting('#photosVetement');
+                }
+            })
+            .fail(function () {
+                alert("Une erreur est survenue, nous mettons tout en oeuvre pour résoudre ce problème !");
+            });
+        }
+
+
+        //**************************************************************************************************
+
+        function SupprimeImage(s) {
+            debugger;
+            if ($('#collapseOne.in').length == 1) {
+                var vStyle = $("#fsVetement #PhotoVetement_Style option:selected").val();
+                var vVetement = $("#fsVetement #PhotoVetement_Vetement option:selected").val();
+
+                if (vVetement == "") { alert('Vous devez choisir un type de vêtement.') }
+                else {
+                    if (confirm("Êtes-vous sûr de vouloir supprimer l'image " + s)) {
+                        var url = '@Url.Action("SupprimeImage", "Upload")';
+
+                        $.get(url, { nom: s, style: vStyle, vetement: vVetement });
+
+                        $("#fsVetement #PhotoVetement_Style").trigger("change");
+                    }
+                }
+            }
+            else if ($('#collapseTwo.in').length == 1) {
+                var vStyle = $("#fsHabillage #PhotoHabillage_Style option:selected").val();
+                if (confirm("Êtes-vous sûr de vouloir supprimer l'image " + s)) {
+                    var url = '@Url.Action("SupprimeImage", "Upload")';
+
+                    $.get(url, { nom: s, style: vStyle });
+
+                    $("#fsHabillage #PhotoHabillage_Style").trigger("change");
+                }
+            }
+        }
+
+
+        //**************************************************************************************************
+
+        function ChargeImagesHabillage(xstyle) {
+            var url = '@Url.Action("AffichePhotosHabillage", "Upload")';
+
+            var jqxhr = $.ajax({
+                cache: false,
+                type: "GET",
+                url: url,
+                data: { style: xstyle }
+            })
+            .success(function (data) {
+                if (data == "\r\n")
+                    $('#photosHabillage').html("Aucune photo disponible !");
+                else {
+                    $('#photosHabillage').html(data);
+
+                    CarouselHorizontalSetting('#photosHabillage');
+                }
+            })
+            .fail(function () {
+                alert("Une erreur est survenue, nous mettons tout en oeuvre pour résoudre ce problème !");
+            });
+        }
+    </script>
+}

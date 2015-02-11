@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>Mode conseil</title>
+
+    @Styles.Render("~/Content/Bootstrap")
+    @Scripts.Render("~/Bundles/Bootstrap/a")
+
+    @Styles.Render("~/Content/Custom")
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar"
+                        data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">@Html.ActionLink("your logo here", "Index", "Home")</a>
+                <div class="nav-collapse">
+                    <ul class="nav nav-pills">
+                        <li class="@(ViewBag.Page == "Home" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
+                        
+                        
+                       <li class="@(ViewBag.Page == "Demande" ? "active" : "")">@Html.ActionLink("Mes demandes", "Demandes", "Recherche")</li>                        
+                       <li class="@(ViewBag.Page == "Proposition" ? "active" : "")">@Html.ActionLink("Mes propositions", "Propositions", "Recherche")</li>
+                        
+
+                        <li class="@(ViewBag.Page == "About" ? "active" : "")">@Html.ActionLink("About", "About", "Home")</li>
+                        <li class="@(ViewBag.Page == "Contact" ? "active" : "")">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+                <div class="nav-collapse text-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                </div>
+            </div>
+            <p>@Html.Partial("_ListStylePartial")</p>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                <!--Sidebar content-->
+            </div>
+            <div class="span10">
+                @RenderSection("featured", required: false)
+                <section>@RenderBody()</section>
+            </div>
+        </div>
+    </div>
+
+    
+    @* n'utilise pas le bundle car ça ne charge pas  le js de Bootstrap !*@
+    <script src="@Url.Content("~/Scripts/Bootstrap/bootstrap.min.js")"></script>
+
+    @RenderSection("scripts", required: false)
+</body>

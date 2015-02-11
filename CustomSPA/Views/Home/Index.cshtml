@@ -1,0 +1,439 @@
+﻿@using CustomSPA.Helpers
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_master.cshtml";
+}
+
+<h2>Index</h2>
+<hr/>
+<a href="http://getbootstrap.com/2.3.2/base-css.html"><strong>Les bases du CSS de Bootstrap</strong></a>
+<hr />
+
+
+<p>Test popup modal</p>
+<a class="btn" role="button" href="#recherche" data-toggle="modal">sportMaster</a>
+<div id="recherche" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Modal header</h3>
+    </div>
+    <div class="modal-body">
+        <p>One fine body…</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Paragraphe de base sans la class "lead" : Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.</p>
+<p class="lead">Paragraphe de base avec la class "lead" : Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.</p>
+
+<p>Balise <code>&lt;small&gt;</code> : <small>voilà un petit texte</small></p>
+
+<p>Balise <code>&lt;bold&gt;</code> : <strong>voici un texte en gras</strong></p>
+
+<p>balise <code>&lt;em&gt;</code> : <em>voilà un texte en italique</em></p>
+
+<p class="text-left">Class "text-left" : Left aligned text.</p>
+<p class="text-center">Class "text-center" : Center aligned text.</p>
+<p class="text-right">Class "text-right" : Right aligned text.</p>
+
+<p class="muted">Class "muted" : Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>
+<p class="text-warning">Class "text-warning" : Etiam porta sem malesuada magna mollis euismod.</p>
+<p class="text-error">Class "text-error" : Donec ullamcorper nulla non metus auctor fringilla.</p>
+<p class="text-info">Class "text-info" : Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis.</p>
+<p class="text-success">Class "text-success" : Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+
+<p>Voici une abbréviation pour <abbr title="HyperText Markup Language">HTML</abbr>...</p>
+<p>Voici la même abbréviation pour <abbr title="HyperText Markup Language" class="initialism">HTML</abbr> avec la class "initialism"</p>
+
+Balise blockquote : 
+<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p></blockquote>
+<pre>
+Balise &lt;blockquote&gt; et &lt;small&gt; et &lt;cite&gt; : 
+</pre>
+<blockquote>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+    <small>test...</small>
+    <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+</blockquote>
+
+Balise blockquote avec la classe "pull-right" :
+<blockquote class="pull-right"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p><small>test...</small></blockquote>
+
+
+<br /><br /><br />
+<hr />
+<ul><li>tata</li><li>toto</li><li>tutu</li></ul>
+<ol><li>tata</li><li>toto</li><li>tutu</li></ol>
+<ul class="unstyled"><li>liste</li><li>ul</li><li>sans</li><li>style</li></ul>
+<ul class="inline"><li>liste</li><li>ul</li><li>en</li><li>ligne</li></ul>
+<hr />
+
+Description verticale :
+<dl>
+    <dt>Titre A</dt><dd>Description A</dd>
+    <dt>Titre B</dt><dd>Description B</dd>
+</dl>
+Description horizontale avec la class "dl-horizontal"
+<dl class="dl-horizontal">
+    <dt>Titre C</dt>
+    <dd>Description C</dd>
+    <dt>Titre D</dt>
+    <dd>Description D</dd>
+</dl>
+<hr />
+
+<pre>
+Balise &lt;table&gt; et la class "table" : 
+</pre>
+<div style="width:300px">
+    <table class="table">
+        <tr><th>Nom</th><th>Prenom</th></tr>
+        <tr><td>toto</td><td>pinpun</td></tr>
+        <tr><td>tata</td><td>falpa</td></tr>
+    </table>
+</div>
+<pre>
+Balise &lt;table&gt; et la class "table" et "table-striped": 
+</pre>
+<div style="width:300px">
+    <table class="table table-striped">
+        <tr><th>Nom</th><th>Prenom</th></tr>
+        <tr><td>toto</td><td>pinpun</td></tr>
+        <tr><td>tata</td><td>falpa</td></tr>
+        <tr><td>titi</td><td>mulote</td></tr>
+    </table>
+</div>
+<pre>
+Balise &lt;table&gt; et la class "table" et "table-striped" et "table-bordered": 
+</pre>
+<div style="width:300px">
+    <table class="table table-striped table-bordered">
+        <tr><th>Nom</th><th>Prenom</th></tr>
+        <tr><td>toto</td><td>pinpun</td></tr>
+        <tr><td>tata</td><td>falpa</td></tr>
+    </table>
+</div>
+<pre>
+Balise &lt;table&gt; et la class "table" et "table-striped" et "table-bordered" et "table-hover": 
+</pre>
+<div style="width:300px">
+    <table class="table table-striped table-bordered table-hover">
+        <tr><th>Nom</th><th>Prenom</th></tr>
+        <tr><td>toto</td><td>pinpun</td></tr>
+        <tr><td>tata</td><td>falpa</td></tr>
+    </table>
+</div>
+<pre>
+Balise &lt;table&gt; et la class "table" et "table-striped" et "table-bordered" et "table-hover" et "table-condensed": 
+</pre>
+<div style="width:300px">
+    <table class="table table-striped table-bordered table-hover table-condensed">
+        <tr><th>Nom</th><th>Prenom</th></tr>
+        <tr><td>toto</td><td>pinpun</td></tr>
+        <tr><td>tata</td><td>falpa</td></tr>
+    </table>
+</div>
+<pre>Option de classe sur les lignes</pre>
+<div style="width:300px">
+    <table class="table table-striped">
+        <tr><th>Nom</th><th>Status</th></tr>
+        <tr class="success"><td>toto</td><td>class success</td></tr>
+        <tr class="error"><td>tata</td><td>class error</td></tr>
+        <tr class="warning"><td>titi</td><td>class warning</td></tr>
+        <tr class="info"><td>tutu</td><td>class info</td></tr>
+    </table>
+</div>
+<pre>Tableau avec les balises spécifiques</pre>
+<div style="width:300px">
+    <table class="table">
+        <caption>TABLEAU</caption>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>toto</td><td>pinpun</td></tr>
+            <tr><td>tata</td><td>falpa</td></tr>
+        </tbody>
+    </table>
+</div>
+<hr />
+<pre>Formulaire example :</pre>
+<form>
+    <fieldset>
+        <legend>Legend</legend>
+        <label>Label name</label>
+        <input type="text" placeholder="Type something…">
+        <span class="help-block">Example block-level help text here.</span>
+        <label class="checkbox">
+            <input type="checkbox"> Check me out
+        </label>
+        <button type="submit" class="btn">Submit</button>
+    </fieldset>
+</form>
+<pre>Zone de recherche avec la class "form-search" :</pre>
+<form class="form-search">
+    <input type="text" class="input-medium search-query">
+    <button type="submit" class="btn">Search</button>
+</form>
+<pre>Zone de recherche avec bouton intégré dans zone de texte</pre>
+<form class="form-search">
+    <div class="input-append">
+        <input type="text" class="span2 search-query">
+        <button type="submit" class="btn">Search</button>
+    </div>
+    <div class="input-prepend">
+        <button type="submit" class="btn">Search</button>
+        <input type="text" class="span2 search-query">
+    </div>
+</form>
+<pre>Formulaire afficher en ligne avec la class "form-inline" :</pre>
+<form class="form-inline">
+    <input type="text" class="input-small" placeholder="Email">
+    <input type="password" class="input-small" placeholder="Password">
+    <label class="checkbox">
+        <input type="checkbox"> Remember me
+    </label>
+    <button type="submit" class="btn">Sign in</button>
+</form>
+<pre>Formulaire horizontal avec les class "form-horizontal" et "control-group" et "control-label" et "controls" et "help-inline"</pre>
+<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label" for="inputEmail">Email</label>
+        <div class="controls">
+            <input type="text" id="inputEmail" placeholder="Email"><span class="help-inline">Saisie ton email</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputPassword">Password</label>
+        <div class="controls">
+            <input type="password" id="inputPassword" placeholder="Password"><span class="help-inline">tape ton mot de passe</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox"> Remember me
+            </label>
+            <button type="submit" class="btn">Sign in</button>
+        </div>
+    </div>
+</form>
+<pre>test radio bouton en ligne</pre>
+<div>
+    <label class="checkbox inline">
+        <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+    </label>
+    <label class="checkbox inline">
+        <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+    </label>
+    <label class="checkbox inline">
+        <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+    </label>
+</div>
+<pre>Balise &lt;select&gt;</pre>
+<select><option>1</option><option>2</option></select>
+<select multiple="multiple"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+<pre>Balise &lt;input&gt; avec class "input-prepend" et "input-append"</pre>
+<div class="input-prepend input-append">
+    <span class="add-on">$</span>
+    <input class="span2" id="appendedPrependedInput" type="text">
+    <span class="add-on">.00</span>
+</div>
+<pre>Balise &lt;input&gt; et &lt;button&gt; avec class "input-append" </pre>
+<div class="input-append">
+    <input class="span2" id="appendedInputButton" type="text">
+    <button class="btn" type="button">Go!</button>
+</div>
+<div class="input-append">
+    <input class="span2" id="appendedInputButtons" type="text">
+    <button class="btn" type="button">Search</button>
+    <button class="btn" type="button">Options</button>
+</div>
+<pre>Balise &lt;input&gt; et &lt;button&gt; avec class "input-append" ou "input-prepend"</pre>
+<div class="input-append">
+    <input class="span2" id="appendedDropdownButton" type="text">
+    <div class="btn-group">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+            Action
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>Chercher</li>
+            <li>Ajouter</li>
+            <li>Quitter</li>
+        </ul>
+    </div>
+</div>
+<pre>Size input text</pre>
+<div>
+    <input class="input-mini" type="text" placeholder=".input-mini"><br />
+    <input class="input-small" type="text" placeholder=".input-small"><br />
+    <input class="input-medium" type="text" placeholder=".input-medium"><br />
+    <input class="input-large" type="text" placeholder=".input-large"><br />
+    <input class="input-xlarge" type="text" placeholder=".input-xlarge"><br />
+    <input class="input-xxlarge" type="text" placeholder=".input-xxlarge"><br />
+    <input class="input-block-level" type="text" placeholder=".input-block-level">
+</div>
+<pre>Size avec class "span1" jusqu'à "span12"</pre>
+<div>
+    <input class="span1" type="text" placeholder=".span1"><br />
+    <input class="span2" type="text" placeholder=".span2"><br />
+    <input class="span3" type="text" placeholder=".span3"><br />
+    <select class="span1"><option>1</option><option>2</option><option>3</option><option>4</option></select><br />
+    <select class="span2"><option>1</option><option>2</option><option>3</option><option>4</option></select><br />
+    <select class="span3"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+</div>
+<pre>Utilisation des class "controls" et "controls-row" sans formulaire</pre>
+<div class="controls">
+    <input class="span5" type="text" placeholder=".span5">
+</div>
+<div class="controls controls-row">
+    <input class="span4" type="text" placeholder=".span4">
+    <input class="span1" type="text" placeholder=".span1">
+</div>
+<pre>Input NON modifiable : span avec un style input text</pre>
+<span class="input-xlarge uneditable-input">Some value here</span>
+<pre>Balise &lt;div&gt; avec la class "form-actions" qui doit être utilisé dans une balise &lt;form&gt;</pre>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    <button type="button" class="btn">Cancel</button>
+</div>
+<pre>Input validation</pre>
+<div class="control-group warning">
+    <label class="control-label" for="inputWarning">Input with warning</label>
+    <div class="controls">
+        <input type="text" id="inputWarning">
+        <span class="help-inline">Something may have gone wrong</span>
+    </div>
+</div>
+
+<div class="control-group error">
+    <label class="control-label" for="inputError">Input with error</label>
+    <div class="controls">
+        <input type="text" id="inputError">
+        <span class="help-inline">Please correct the error</span>
+    </div>
+</div>
+
+<div class="control-group info">
+    <label class="control-label" for="inputInfo">Input with info</label>
+    <div class="controls">
+        <input type="text" id="inputInfo">
+        <span class="help-inline">Username is already taken</span>
+    </div>
+</div>
+
+<div class="control-group success">
+    <label class="control-label" for="inputSuccess">Input with success</label>
+    <div class="controls">
+        <input type="text" id="inputSuccess">
+        <span class="help-inline">Woohoo!</span>
+    </div>
+</div>
+<pre>Style des boutons</pre>
+<table>
+    <thead>
+        <tr>
+            <th>Bouton</th>
+            <th>class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><button class="btn">Default</button></td><td>btn</td></tr>
+        <tr><td><button class="btn btn-primary">Primary</button></td><td>btn btn-primary</td></tr>
+        <tr><td><button class="btn btn-info">Info</button></td><td>btn btn-info</td></tr>
+        <tr><td><button class="btn btn-success btn-large">Success (large)</button></td><td>btn btn-success</td></tr>
+        <tr><td><button class="btn btn-warning">Warning</button></td><td>btn btn-warning</td></tr>
+        <tr><td><button class="btn btn-danger btn-small">Danger (small)</button></td><td>btn btn-danger</td></tr>
+        <tr><td><button class="btn btn-inverse btn-mini">Inverse (mini)</button></td><td>btn btn-inverse</td></tr>
+        <tr><td><button class="btn btn-link">Link</button></td><td>btn btn-link</td></tr>
+    </tbody>
+</table>
+<pre>Afficher des groupes de bouton homogènes en taille</pre>
+<div style="width:350px">
+    <button class="btn btn-large btn-block btn-primary" type="button">Accepter la mission</button>
+    <button class="btn btn-large btn-block" type="button">Refuser la mission</button>
+</div>
+<pre>Etat désactivé : utilisé les class "btn..." et "disabled" sur la balise &lt;a&gt;</pre>
+<a href="#" class="btn btn-large btn-primary disabled">Primary link</a>
+<a href="#" class="btn btn-large disabled">Link</a>
+<pre>L'état désactivé d'un bouton se fait via l'attribue disabled ou la class "disabled" :</pre>
+<button type="button" class="btn btn-large btn-primary disabled">Primary button</button>
+<button type="button" class="btn btn-large" disabled>Button</button>
+<pre>
+Image class :
+    &lt;img src="..." class="img-rounded"&gt;
+    &lt;img src="..." class="img-circle"&gt;
+    &lt;img src="..." class="img-polaroid"&gt;
+    .img-rounded and .img-circle do not work in IE7-8 due to lack of border-radius support.
+</pre>
+<pre>Utilise les icones :</pre>
+<i class="icon-search"></i>
+<i class="icon-fullscreen"></i>
+<pre>Les icones dans un groupe de bouton</pre>
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <a class="btn" href="#"><i class="icon-align-left"></i></a>
+        <a class="btn" href="#"><i class="icon-align-center"></i></a>
+        <a class="btn" href="#"><i class="icon-align-right"></i></a>
+        <a class="btn" href="#"><i class="icon-align-justify"></i></a>
+    </div>
+</div>
+<pre>Les icones dans un groupe de bouton avec une liste déroulante</pre>
+<div class="btn-group">
+    <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> User</a>
+    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+        <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+        <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+        <li class="divider"></li>
+        <li><a href="#"><i class="i"></i> Make admin</a></li>
+    </ul>
+</div>
+<pre>Placer une icone sur un LinkButton</pre>
+<a class="btn btn-small" href="#"><i class="icon-star"></i> Star</a>
+<pre>Les icones dans un &lt;ul&gt;</pre>
+<ul class="nav nav-list">
+    <li class="active"><a href="#"><i class="icon-home icon-white"></i> Home</a></li>
+    <li><a href="#"><i class="icon-book"></i> Library</a></li>
+    <li><a href="#"><i class="icon-pencil"></i> Applications</a></li>
+    <li><a href="#"><i class="i"></i> Misc</a></li>
+</ul>
+<pre>Une icone intégré dans un groupe de controle avec un input text</pre>
+<div class="control-group">
+    <label class="control-label" for="inputIcon">Email address</label>
+    <div class="controls">
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-envelope"></i></span>
+            <input class="span2" id="inputIcon" type="text">
+        </div>
+    </div>
+</div>
+
+
+<div>@Html.Vignette("http://www.launchbit.com/taz-i/4646-4626.png", "top")</div>

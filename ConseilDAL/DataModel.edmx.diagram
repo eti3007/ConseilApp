@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="76b3ba4833524d53a45b7dcf7ce33b47" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="ConseilDAL.Conseil" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConseilDAL.Habillage" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConseilDAL.Notification" Width="1.5" PointX="2.125" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConseilDAL.Personne" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConseilDAL.Photo" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConseilDAL.StatutHistorique" Width="1.5" PointX="12" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConseilDAL.Style" Width="1.5" PointX="9.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConseilDAL.SuiviTelecharge" Width="1.5" PointX="5.625" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConseilDAL.TypeParam" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConseilDAL.UserProfile" Width="1.5" PointX="8.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConseilDAL.Vetement" Width="1.5" PointX="8.125" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="ConseilDAL.FK_Conseil_PersonneConseille" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Conseil_PersonneDemande" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Conseil_Style" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Conseil_TypeParam" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Habillage_Conseil" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Notification_Conseil" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Notification_Personne" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Notification_TypeParam" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Photo_Personne" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_StatutHistorique_Personne" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_SuiviTelecharge_Personne" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Photo_TypeParam" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Photo_Vetement" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_StatutHistorique_Style" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_StatutHistorique_TypeParam" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.FK_Vetement_TypeParam" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.PhotoHabillage" ManuallyRouted="false" />
+        <AssociationConnector Association="ConseilDAL.PhotoStyle" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

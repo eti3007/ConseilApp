@@ -1,0 +1,68 @@
+﻿@model ConseilApp.Models.AccountViewModel
+@{
+    ViewBag.Title = "Enregistrez vous";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset class="form-horizontal">
+        <legend>Formulaire d'inscription</legend>
+        <div class="control-group">
+            @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(m => m.UserName)                
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+            <div class="controls">
+                @Html.PasswordFor(m => m.Password)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+            <div class="controls">
+                @Html.PasswordFor(m => m.ConfirmPassword)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.Email)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.EnvoiEmail, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.EnvoiEmail)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Genre, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(m => m.Genre, Model.genreListe)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Style, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(m => m.Style,Model.styleListe,"-- Choisissez un style --")
+                @Html.ValidationMessageFor(x => x.Style)
+            </div>
+        </div>
+
+        <div style="max-width:300px;margin-bottom:30px">
+            <input type="submit" value="Register" class="btn btn-large btn-success btn-block" />
+        </div>
+    </fieldset>
+}
+
+
+
+

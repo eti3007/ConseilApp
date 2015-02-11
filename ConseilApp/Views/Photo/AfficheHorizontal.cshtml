@@ -1,0 +1,20 @@
+﻿@model List<string>
+
+<ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
+ @foreach (string s in Model)
+ {
+     <li><img src="@s" width="75" height="75" alt="" class="img-thumbnail" /></li>
+ }
+</ul>
+
+@section scripts{
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+        jQuery('#mycarousel').jcarousel({
+            vertical: false,
+            scroll: 2
+        });
+    });
+</script>
+}

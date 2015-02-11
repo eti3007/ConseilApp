@@ -1,0 +1,33 @@
+﻿@model ConseilApp.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Gérer votre compte";
+}
+
+<section id="UplodadImage" style="float:right">
+    @Html.ActionLink("Gérer vos images...", actionName: "UploadPhotos", controllerName: "Upload", routeValues: new { vetementStyleId = ViewBag.StyleId, vetementId = "0", habillageStyleId = ViewBag.StyleId }, htmlAttributes: new { @class = "btn btn-info btn-large" })
+</section>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<p class="message-success">@ViewBag.StatusMessage</p>
+
+<p>Vous êtes connecté en tant que <strong>@User.Identity.Name</strong>.</p>
+
+@if (ViewBag.HasLocalPassword)
+{
+    @Html.Partial("_ChangePasswordPartial")
+}
+else
+{ 
+    @Html.Partial("_SetPasswordPartial")
+}
+
+
+<section id="externalLogins">
+    @Html.Action("RemoveExternalLogins")
+
+    <h3>Add an external login</h3>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>
+
