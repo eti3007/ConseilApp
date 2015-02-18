@@ -130,8 +130,12 @@ namespace ConseilApp.Controllers
                     base.RegisterPerson(personneId, model.UserName, model.Style);
                     base.SetSession(SessionKey.ListeStyle, this._StyleService.RecupereListeDesStyles());
 
+                    base.SetSession(SessionKey.PersonneStatut, 1);
+
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("UploadPhotos", "Upload", new { styleId = base.StyleEnCours, vetementId = 0 });
+
+
+                    return RedirectToAction("UploadPhotos", "Upload", new { vetementStyleId = base.StyleEnCours, vetementId = 0, habillageStyleId = 0 });
                 }
                 catch (MembershipCreateUserException e)
                 {

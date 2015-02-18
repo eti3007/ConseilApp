@@ -28,13 +28,16 @@ namespace ConseilREP
             using (var context = new ConseilEntitiesBis())
             {
                 // Vérification sur les images existantes en base
-                var lst = context.Photos.Include(c => c.Styles)
-                                            .Where(c => (c.PersonneId == personneId) &&
-                                                        (c.VetementId == vetementId) &&
-                                                        (c.Styles.Count(v => v.Id == styleId) > 0))
-                                            .Select(c => c.Url).ToList();
-                foreach (string s in lst) { urlList.Remove(s); }
-                lst = null;
+                var nbPhoto = context.Photos.Count(c => (c.PersonneId == personneId));
+                if (nbPhoto > 0) {
+                    var lst = context.Photos.Include(c => c.Styles)
+                                                .Where(c => (c.PersonneId == personneId) &&
+                                                            (c.VetementId == vetementId) &&
+                                                            (c.Styles.Count(v => v.Id == styleId) > 0))
+                                                .Select(c => c.Url).ToList();
+                    foreach (string s in lst) { urlList.Remove(s); }
+                    lst = null;
+                }
 
                 using (TransactionScope transaction = new TransactionScope())
                 {
@@ -200,6 +203,9 @@ namespace ConseilREP
             {
                 try
                 {
+                    var nbPhoto = context.Photos.Count(c => (c.PersonneId == personneId));
+                    if (nbPhoto <= 0) return null;
+
                     result = context.Photos.Include(c => c.Styles)
                                            .Where(c => (c.PersonneId == personneId) && 
                                                        (c.TypeId == (int)typeId) &&
@@ -225,6 +231,9 @@ namespace ConseilREP
             {
                 try
                 {
+                    var nbPhoto = context.Photos.Count(c => (c.PersonneId == personneId));
+                    if (nbPhoto <= 0) return null;
+
                     result = context.Photos.Include(c => c.Styles)
                                            .Where(c => (c.PersonneId == personneId) &&
                                                        (c.TypeId == (int)PhotoType.Vetement) &&

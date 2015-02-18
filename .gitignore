@@ -1,0 +1,13 @@
+ConseilApp.Tests/obj/*
+ConseilApp/bin/*
+ConseilApp/obj/*
+ConseilBLL/bin/*
+ConseilBLL/obj/*
+ConseilDAL/bin/*
+ConseilDAL/obj/*
+ConseilOBJ/bin/*
+ConseilOBJ/obj/*
+ConseilREP/bin/*
+ConseilREP/obj/*
+CustomSPA/bin/*
+CustomSPA/obj/*

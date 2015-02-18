@@ -24,7 +24,7 @@ namespace ConseilREP
                     int userProfilId = context.UserProfiles.Where(c => c.UserName == pseudo).Select(c => c.UserId).FirstOrDefault();
                     if (userProfilId > 0)
                     {
-                        //personneToAdd.Id = userProfilId;   //<=== la colonne Id est incrémenté automatiquement
+                        personneToAdd.Id = userProfilId;
                         this.AddNew(personneToAdd, styleId);
                         result = userProfilId;
                     }

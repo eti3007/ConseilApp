@@ -10,6 +10,8 @@ namespace ConseilApp.Builders
     {
         public List<string> UrlPhotoListe(List<Photo> photos)
         {
+            if (photos == null) return new List<string>();
+
             List<string> objListe = new List<string>();
             string value;
 
