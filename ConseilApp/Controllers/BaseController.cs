@@ -51,7 +51,11 @@ namespace ConseilApp.Controllers
 
         public T GetSession<T>(SessionKey key)
         {
-            return (T)Session[key.ToString()];
+            try
+            {
+                return (T)Session[key.ToString()];
+            }
+            catch { return default(T); }
         }
 
         public bool IsSetSession(SessionKey key)

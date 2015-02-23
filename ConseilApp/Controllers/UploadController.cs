@@ -32,6 +32,8 @@ namespace ConseilApp.Controllers
         [Authorize]
         public ActionResult UploadPhotos(int vetementStyleId, int vetementId, int habillageStyleId)
         {
+            ViewBag.Page = "UploadPhotos";
+
             // Récupère le nombre maximum de photo téléchargable par type de vêtement :
             var MaxPhoto = System.Configuration.ConfigurationManager.AppSettings["MaxPhotoParTypeVetement"];
 
@@ -68,8 +70,25 @@ namespace ConseilApp.Controllers
         {
             if (Request.Files.Count > 0)
             {
-                if (model.VetementValidation) UploadVetement(model);
-                else UploadHabillage(model);
+                int styleEnCours = base.StyleEnCours;
+                if (model.VetementValidation)
+                {
+                    styleEnCours = Convert.ToInt32(model.PhotoVetement.Style);
+                    UploadVetement(model);
+                }
+                else
+                {
+                    styleEnCours = Convert.ToInt32(model.PhotoHabillage.Style);
+                    UploadHabillage(model);
+                }
+
+
+                // met à jour le style en session :
+                if (base.StyleEnCours != styleEnCours)
+                    base.UpdateStyleCookieValue(styleEnCours.ToString());
+                
+                // met à jour le statut sauvegarder en Session
+                //base.SetSession(SessionKey.PersonneStatut, this._StatutHistoriqueService.RecupereStatusPourPersonneEtStyle(base.PersonneId, styleEnCours));
             }
 
             // Recharge les photos sur la même page

@@ -45,6 +45,7 @@ namespace ConseilApp.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            ViewBag.Page = "Login";
             return View();
         }
 
@@ -96,6 +97,7 @@ namespace ConseilApp.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Page = "Register";
             AccountViewModel model = new AccountViewModel();
 
             // Mise en Session de la liste des styles
@@ -133,7 +135,6 @@ namespace ConseilApp.Controllers
                     base.SetSession(SessionKey.PersonneStatut, 1);
 
                     WebSecurity.Login(model.UserName, model.Password);
-
 
                     return RedirectToAction("UploadPhotos", "Upload", new { vetementStyleId = base.StyleEnCours, vetementId = 0, habillageStyleId = 0 });
                 }

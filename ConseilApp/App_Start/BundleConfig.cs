@@ -15,7 +15,8 @@ namespace ConseilApp
                         "~/Content/Bootstrap/css/bootstrap-responsive.css"));
             bundles.Add(new ScriptBundle("~/Bundles/Bootstrap/a").Include(
                         "~/Scripts/JQuery/jquery-min.js",
-                        "~/Scripts/JQuery/jquery-ui-min.js"));
+                        "~/Scripts/JQuery/jquery-ui-min.js",
+                        "~/Scripts/Custom/Menu.js"));
             // Login - Register - Manage
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",

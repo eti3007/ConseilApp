@@ -1,0 +1,12 @@
+﻿@model ConseilApp.Models.MenuViewModel
+
+<div class="nav-collapse">
+    <ul class="nav nav-pills">
+        @foreach (var menu in Model.Menus)
+        {
+            <li class="@(Model.Page == menu.PageName ? "active" : "")">
+                @Html.ActionLink(menu.Texte, menu.Action, menu.Controller)
+            </li>
+        }
+    </ul>
+</div>
