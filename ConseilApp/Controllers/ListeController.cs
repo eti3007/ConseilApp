@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ConseilApp.Builders.Interfaces;
 
 namespace ConseilApp.Controllers
 {
     public class ListeController : BaseController
     {
+        private IMenuBuilder _MenuBuilder;
+
+        public ListeController(IMenuBuilder MenuBuilder) { this._MenuBuilder = MenuBuilder; }
+
         [Authorize]
         public string ListeStyle()
         {
@@ -28,15 +33,16 @@ namespace ConseilApp.Controllers
         }
 
         [Authorize]
-        public string MajStyleEnCours(string id)
+        [HttpPost]
+        public ActionResult MajStyleEnCours(string id, string page)
         {
             if (!string.IsNullOrEmpty(id))
             {
                 UpdateStyleCookieValue(id);
+                
+                string[] route = this._MenuBuilder.GetControllerAction(page);
 
-                //base.SetSession(SessionKey.PersonneStatut, id);
-
-                return "ok"; // RedirectToAction("Index", "Home");
+                return RedirectToAction(route[1], route[0]);
             }
             return null;
         }

@@ -11,27 +11,13 @@
                 var val = $(this).val();
                 var page = '@ViewBag.Page';
                 var resultat = "";
-
-                $.ajax({
-                    url: url,
-                    type: "GET",
-                    data: { id: val }
-                })
-                .done(function (reponse) {
-                    resultat = reponse;
-                });
-
-                if (resultat == "ok") { CreateMenu("/Home/Menu", page); }
-
-
-                //if (resultat == "ok" && $('#dvMenu') != undefined) {
-                //    alert('in : ' + page);
-                //    $.ajax({
-                //        url: "/Home/Menu",
-                //        type: "GET",
-                //        data: { pageEnCours: page }
-                //    }).done(function (vue) { $('#dvMenu').html(vue); });
-                //}
+                if (val != undefined && page != undefined) {
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: { id: val, page: page }
+                    });
+                }
             });
         });
     });

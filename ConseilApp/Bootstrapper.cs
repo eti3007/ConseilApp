@@ -54,6 +54,7 @@ namespace ConseilApp
         container.RegisterType<IPersonneBuilder, PersonneBuilder>();
         container.RegisterType<IPhotoBuilder, PhotoBuilder>();
         container.RegisterType<IRechercheBuilder, RechercheBuilder>();
+        container.RegisterType<IMenuBuilder, MenuBuilder>();
 
 
         RegisterTypes(container);
