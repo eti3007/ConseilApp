@@ -29,7 +29,7 @@ namespace ConseilREP
                 }
                 catch (Exception ex)
                 {
-                    throw new CustomException().CustomGetException(ex);
+                    throw new CustomException().CustomGetException(ex, "StyleRepository.GetList");
                 }
             }
 
@@ -44,9 +44,36 @@ namespace ConseilREP
             }
         }
 
+        /// <summary>
+        /// Récupère les styles dans lesquelles la personne est conseillère
+        /// </summary>
+        public List<Style> GetListForHabillage(int persId)
+        {
+            List<Style> result = null;
+
+            using (var context = new ConseilEntitiesBis())
+            {
+                result = (from sh in context.StatutHistoriques
+                          join s in context.Styles on sh.StyleId equals s.Id
+                          where sh.TypeId.Equals(3) &&
+                                sh.PersonneId.Equals(persId)
+                          select s).ToList();
+
+            }
+
+            return result;
+        }
+
 
         public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+
         }
     }
 }

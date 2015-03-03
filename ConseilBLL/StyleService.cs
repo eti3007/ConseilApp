@@ -23,13 +23,30 @@ namespace ConseilBLL
             return repository.GetList();
         }
 
+        public List<Style> RecupereListeDesStylesConseiller(int personneId)
+        {
+            return repository.GetListForHabillage(personneId);
+        }
+
         public List<DropDownListeStyle> RecupereListeDesStylesPourDDL()
         {
             List<DropDownListeStyle> result = new List<DropDownListeStyle>();
-            foreach (var item in repository.GetList())
-            {
-                result.Add(new DropDownListeStyle() { Id = item.Id, Nom = item.Nom });
-            }
+            var lst = repository.GetList();
+            if (lst != null)
+                foreach (var item in lst) {
+                    result.Add(new DropDownListeStyle() { Id = item.Id, Nom = item.Nom });
+                }
+            return result;
+        }
+
+        public List<DropDownListeStyle> RecupereListeDesStylesConseillerPourDDL(int personneId)
+        {
+            List<DropDownListeStyle> result = new List<DropDownListeStyle>();
+            var lst = repository.GetListForHabillage(personneId);
+            if (lst != null)
+                foreach (var item in lst) {
+                    result.Add(new DropDownListeStyle() { Id = item.Id, Nom = item.Nom });
+                }
             return result;
         }
     }

@@ -32,21 +32,6 @@ namespace ConseilApp.Controllers
             return selection.ToString();
         }
 
-        [Authorize]
-        [HttpPost]
-        public ActionResult MajStyleEnCours(string id, string page)
-        {
-            if (!string.IsNullOrEmpty(id))
-            {
-                UpdateStyleCookieValue(id);
-                
-                string[] route = this._MenuBuilder.GetControllerAction(page);
-
-                return RedirectToAction(route[1], route[0]);
-            }
-            return null;
-        }
-
         private string DropdownStyle()
         {
             System.Text.StringBuilder selection = new System.Text.StringBuilder();

@@ -7,5 +7,6 @@ namespace ConseilREP.Interfaces
     {
         List<Style> GetList();
         Style GetById(int styleId);
+        List<Style> GetListForHabillage(int persId);
     }
 }

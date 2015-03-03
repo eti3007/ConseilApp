@@ -28,10 +28,10 @@ namespace ConseilDAL.Exceptions
                     ); // Add the original exception as the innerException
         }
 
-        public Exception CustomGetException(Exception exc)
+        public Exception CustomGetException(Exception exc, string funcName)
         {
             Exception ex = new Exception("Erreur de récupération de la liste des styles.");
-            ex.Data.Add("funcName", "GetList");
+            ex.Data.Add("funcName", funcName);
             ex.Data.Add("originalException", exc);
 
             return ex;

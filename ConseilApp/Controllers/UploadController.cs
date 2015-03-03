@@ -213,8 +213,13 @@ namespace ConseilApp.Controllers
             UploadVetementViewModel modelVetement = new UploadVetementViewModel();
             var listeStyles = base.ListeDesStyles;
             if (listeStyles == null) base.SetSession(SessionKey.ListeStyle, this._StyleService.RecupereListeDesStyles());
+
+            // récupère la liste de tous les styles disponibles, via le service de Style :
             modelVetement.styleListe = DropDownListBuilder<DropDownListeStyle>.CreateDropDownList(this._StyleService.RecupereListeDesStylesPourDDL());
+
+            // récupère la liste des vêtements, via le service Vetement :
             modelVetement.vetementListe = DropDownListBuilder<DropDownListeVetement>.CreateDropDownList(this._VetementService.RecupereListeDesVetementsPourDDL());
+
             modelVetement.ModeAttente = this._StatutHistoriqueService.RecupereStatusPourPersonneEtStyle(base.PersonneId, vetementStyleId) == (int)PersonneStatus.EnAttente;
             modelVetement.Style = vetementStyleId != 0 ? vetementStyleId.ToString() : base.StyleEnCours.ToString();
             modelVetement.Vetement = vetementId != 0 ? vetementStyleId.ToString() : "";
@@ -226,7 +231,10 @@ namespace ConseilApp.Controllers
             {
                 result.EstConseiller = true;
                 UploadHabillageViewModel modelHabillage = new UploadHabillageViewModel();
-                modelHabillage.styleListe = modelVetement.styleListe;
+
+                // récupère la liste des styles pour lesquelles la personne connecté est conseillère :
+                modelHabillage.styleListe = DropDownListBuilder<DropDownListeStyle>.CreateDropDownList(this._StyleService.RecupereListeDesStylesConseillerPourDDL(base.GetSession<int>(SessionKey.PersonneID)));
+                
                 modelHabillage.Style = habillageStyleId != 0 ? habillageStyleId.ToString() : base.StyleEnCours.ToString();
                 result.PhotoHabillage = modelHabillage;
             }

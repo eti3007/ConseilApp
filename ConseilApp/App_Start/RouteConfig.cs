@@ -26,12 +26,6 @@ namespace ConseilApp
             );
 
             routes.MapRoute(
-                name: "SetDefaultStyle",
-                url: "{controller}/{action}",
-                defaults: new { controller = "Liste", action = "MajStyleEnCours" }
-            );
-
-            routes.MapRoute(
                 name: "MesDemandes",
                 url: "{controller}/{action}",
                 defaults: new { controller = "Recherche", action = "Demandes" }

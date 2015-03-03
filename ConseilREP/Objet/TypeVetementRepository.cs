@@ -30,7 +30,7 @@ namespace ConseilREP
                 }
                 catch (Exception ex)
                 {
-                    throw new CustomException().CustomGetException(ex);
+                    throw new CustomException().CustomGetException(ex, "TypeVetementRepository.GetList");
                 }
             }
             return result;
@@ -38,6 +38,13 @@ namespace ConseilREP
 
         public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+
         }
     }
 }

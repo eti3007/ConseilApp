@@ -21,7 +21,9 @@ namespace ConseilBLL.Interfaces
     public interface IStyleService
     {
         List<Style> RecupereListeDesStyles();
+        List<Style> RecupereListeDesStylesConseiller(int personneId);
         List<DropDownListeStyle> RecupereListeDesStylesPourDDL();
+        List<DropDownListeStyle> RecupereListeDesStylesConseillerPourDDL(int personneId);
     }
 
     public interface ISuiviTelechargementService

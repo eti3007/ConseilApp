@@ -5,15 +5,32 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title</h1>
+    @Html.Partial("_ListStylePartial", new { ViewBag.Page })
 </hgroup>
 
-<div class="container-fluid">
-    <div class="row-fluid" id="Attente">
-        <h3>Les abonnées en attente de conseil</h3>
-        @{Html.RenderPartial("_ListeEnAttente", Model.premiereListe);}
+<div class="accordion" id="accDemandes">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accDemandes" href="#collapseOne">
+                <h4>Les abonnées en attente de conseil</h4>
+            </a>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner" id="dvAttente">
+                @{Html.RenderPartial("_ListeEnAttente", Model);}
+            </div>
+        </div>
     </div>
-    <div class="row-fluid" id="Soutien">
-        <h3>Abonnés sollicitant votre aide</h3>
-        @{Html.RenderPartial("_ListeEnSoutien", Model.deuxiemeListe);}
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accDemandes" href="#collapseTwo">
+                <h4>Abonnés sollicitant votre aide</h4>
+            </a>
+        </div>
+        <div id="collapseTwo" class="accordion-body collapse">
+            <div class="accordion-inner" id="dvSoutien">
+                @{Html.RenderPartial("_ListeEnSoutien", Model);}
+            </div>
+        </div>
     </div>
 </div>

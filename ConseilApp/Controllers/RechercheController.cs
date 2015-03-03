@@ -5,15 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using ConseilApp.Builders.Interfaces;
 using ConseilApp.Models.Recherche;
+using ConseilBLL.Interfaces;
 
 namespace ConseilApp.Controllers
 {
     public class RechercheController : BaseController
     {
-        private IRechercheBuilder _RechercheBuilder;
 
-        public RechercheController(IRechercheBuilder RechercheBuilder)
+        private IRechercheBuilder _RechercheBuilder;
+        private IStyleService _StyleService;
+
+        public RechercheController(IStyleService StyleService, IRechercheBuilder RechercheBuilder)
         {
+            this._StyleService = StyleService;
             this._RechercheBuilder = RechercheBuilder;
         }
 
@@ -26,25 +30,12 @@ namespace ConseilApp.Controllers
         public ActionResult Demandes()
         {
             MenuDemandeEnregistreCookie();
-            ViewBag.Page = "Demande";
+            ViewBag.Page = "Demandes";
             ViewBag.Title = "Gérer vos demandes";
-
-            //*************************************************
-            // créer l'objet du model
-            RechercheModel demandes = GenereNewModel();
-
-            // initialise style et personne Id
-            this._RechercheBuilder.SetPersonneStyleIdentifier(base.PersonneId, base.StyleEnCours);
-
-            // récupère la liste des attentes
-            demandes.premiereListe.apteConseil = _RechercheBuilder.DemandeAbonnePeutAider();
-
-            // récupère la liste des soutiens
-            demandes.deuxiemeListe.proposeAide = _RechercheBuilder.DemandeAbonneProposeAider();
-
-            //*************************************************
-
-            return View(demandes);
+            ViewBag.ListeStyle = base.ListeDesStyles.OrderBy(x => x.Nom).ToList();
+            ViewBag.RechercheStyleEncours = base.ListeDesStyles[0].Id;
+            
+            return View(GetRechercheModel(base.ListeDesStyles[0].Id));
         }
 
         [Authorize]
@@ -58,26 +49,53 @@ namespace ConseilApp.Controllers
             }
             else
             {
-                MenuPropositionEnregistreCookie();
-                ViewBag.Page = "Proposition";
+                List<ConseilOBJ.Style> lstStyleConseiller = this._StyleService.RecupereListeDesStylesConseiller(base.GetSession<int>(SessionKey.PersonneID));
+                if (lstStyleConseiller==null || lstStyleConseiller.Count <= 0) return RedirectToAction("Index", "Home");
+
+                MenuPropositionEnregistreCookie();                
+                ViewBag.Page = "Propositions";
                 ViewBag.Title = "Gérer vos propositions";
+                ViewBag.ListeStyle = lstStyleConseiller;
+                ViewBag.RechercheStyleEncours = lstStyleConseiller[0].Id;
 
-                //*************************************************
-                // créer l'objet du model
-                RechercheModel propositions = GenereNewModel();
+                return View(GetRechercheModel(lstStyleConseiller[0].Id, false));
+            }
+        }
+        
+        [Authorize]
+        public PartialViewResult RecherchePartial(int style, string partialName, string pageName)
+        {
+            ViewBag.RechercheStyleEncours = style;
+            return PartialView(partialName, GetRechercheModel(style, (pageName.Equals("Demandes"))));
+        }
 
-                // initialise style et personne Id
-                this._RechercheBuilder.SetPersonneStyleIdentifier(base.PersonneId, base.StyleEnCours);
+        #region METHODES PRIVEES
+        private RechercheModel GetRechercheModel(int style, bool demande = true)
+        {
+            // créer l'objet du model
+            RechercheModel recherche = GenereNewModel();
 
+            // initialise style et personne Id
+            this._RechercheBuilder.SetPersonneStyleIdentifier(base.PersonneId, style);
+
+            if (demande)
+            {
                 // récupère la liste des attentes
-                propositions.premiereListe.attenteConseil = _RechercheBuilder.PropositionAbonneAttenteConseil();
+                recherche.premiereListe.apteConseil = _RechercheBuilder.DemandeAbonnePeutAider();
 
                 // récupère la liste des soutiens
-                propositions.deuxiemeListe.solliciteAide = _RechercheBuilder.PropositionAbonneSolliciteAide();
-                //*************************************************
-
-                return View(propositions);
+                recherche.deuxiemeListe.proposeAide = _RechercheBuilder.DemandeAbonneProposeAider();
             }
+            else
+            {
+                // récupère la liste des attentes
+                recherche.premiereListe.attenteConseil = _RechercheBuilder.PropositionAbonneAttenteConseil();
+
+                // récupère la liste des soutiens
+                recherche.deuxiemeListe.solliciteAide = _RechercheBuilder.PropositionAbonneSolliciteAide();
+            }
+
+            return recherche;
         }
 
         private RechercheModel GenereNewModel()
@@ -87,6 +105,7 @@ namespace ConseilApp.Controllers
             obj.deuxiemeListe = new DeuxiemeListe();
             return obj;
         }
+        #endregion
 
         [Authorize]
         public PartialViewResult Notification()

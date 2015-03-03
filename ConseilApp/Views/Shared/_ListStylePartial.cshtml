@@ -1,23 +1,75 @@
-﻿@if (Request.IsAuthenticated) {
-    @Html.Action("ListeStyle", "Liste");
+﻿@using ConseilOBJ;
+@{
+    List<Style> lstStyle = ViewBag.ListeStyle;
+}
+
+@if (Request.IsAuthenticated) {
+    <div id="carousel-style" class="carousel slide" style="width:250px;padding-left:100px;padding-right: 100px;">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox" style="width: 250px; text-align: center;">
+            @for (int i = 0; i < lstStyle.Count; i++)
+            {
+                if (i == 0)
+                {
+                    <div class="item active" data-id="@i">
+                        <h4>@lstStyle[i].Nom</h4>
+                    </div>
+                }
+                else
+                {
+                    <div class="item" data-id="@i">
+                        <h4>@lstStyle[i].Nom</h4>
+                    </div>
+                }
+            }
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-style" role="button" data-slide="prev" style="font-size:14px;width:75px;line-height:39px">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-style" role="button" data-slide="next" style="font-size:14px;width:75px;line-height:39px">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 }
 
 
 <script type="text/javascript">
     $(function () {
-        $('select#Style option').each(function () {
-            $(this).on("click", function () {
-                var url = '@Url.Action("MajStyleEnCours", "Liste")';
-                var val = $(this).val();
-                var page = '@ViewBag.Page';
-                var resultat = "";
-                if (val != undefined && page != undefined) {
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: { id: val, page: page }
-                    });
+        $('.carousel').carousel('pause');
+        $('.carousel').bind('slide.bs.carousel', function (e) {
+            console.log($('.carousel div.active').attr('data-id'));
+        });
+
+        $('.carousel').bind('slid', function (e) {
+            console.log($('.carousel div.active').attr('data-id'));
+            var page = '@ViewBag.Page';
+            var text = $('.carousel div.active').text().trim();
+            var id = $('.carousel div.active').attr('data-id');
+
+            // Attente :
+            var url = '@Url.Action("RecherchePartial", "Recherche")';
+            $.ajax({ type: "GET", url: url, data: { style: id, partialName: '_ListeEnAttente', pageName: page } })
+            .success(function (data) {
+                if (data != "\r\n") {
+                    $('#dvAttente').html(data);
+                    console.log(page + ' | attente : ' + data);
                 }
+                else { alert('erreur chargement : ' + page); }
+            });
+
+            // Soutien :
+            var url = '@Url.Action("RecherchePartial", "Recherche")';
+            $.ajax({ type: "GET", url: url, data: { style: id, partialName: '_ListeEnSoutien', pageName: page } })
+            .success(function (data) {
+                if (data != "\r\n") {
+                    $('#dvSoutien').html(data);
+                    console.log(page + ' | soutien : ' + data);
+                }
+                else { alert('erreur chargement : ' + page); }
             });
         });
     });
