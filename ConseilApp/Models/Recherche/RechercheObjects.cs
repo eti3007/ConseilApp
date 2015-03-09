@@ -7,6 +7,7 @@ namespace ConseilApp.Models.Recherche
 {
     public abstract class BaseConseil
     {
+        // Abonné Id
         public int id { get; set; }
         public string pseudo { get; set; }
         public char genre { get; set; }

@@ -47,11 +47,18 @@
 
         $('tr.row-Modal').click(function (event) {
             var modalPopup = '@Html.ModalShow("recherche", "Visualiser les photos habillées", "test", true)';
-            
+
             // récupère l'id de la personne, le pseudo et le texte pour le bouton de validation
             var id = $(this).attr('data-identifier');
             var pseudo = $(this).attr('data-pseudo');
             var btnText = $(this).parents('table').attr('data-validemessage') + pseudo;
+            var styleId = '';
+            
+            if (@ViewBag.RechercheStyleEncours != undefined) {
+                console.log('before');
+                styleId = '@ViewBag.RechercheStyleEncours';
+                console.log('after');
+            }
 
             if (id != undefined) {
                 $('#hdIdentifier').val(id);
@@ -61,7 +68,7 @@
                     url: url,
                     cache: true,
                     type: 'GET',
-                    data: { style: '', personne: id }
+                    data: { style: styleId, personne: id }
                 })
                 .success(function (data) {
                     if (data != "\r\n") {

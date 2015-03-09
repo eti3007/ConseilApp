@@ -17,7 +17,7 @@
         <tbody>
             @foreach (var i in Model.premiereListe.apteConseil)
             {
-                <tr class="row-Modal" data-identifier="@i.id" data-pseudo="@i.pseudo">
+                <tr class="row-Modal habillage" data-identifier="@i.id" data-pseudo="@i.pseudo">
                     <!-- Conseillers qui peuvent aider -->
                     @*<td>@Html.LinkButtonForModal("recherche", i.pseudo, false)</td>*@
                     <td>@i.pseudo</td>
@@ -33,7 +33,7 @@
 }
 else if (Model.premiereListe.attenteConseil != null)
 {
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover" data-validemessage="Proposez votre aide &#224 ">
         <thead>
             <tr>
                 <td>Pseudo</td>
@@ -45,7 +45,7 @@ else if (Model.premiereListe.attenteConseil != null)
         <tbody>
             @foreach (var i in Model.premiereListe.attenteConseil)
             {
-                <tr>
+                <tr class="row-Modal vetement" data-identifier="@i.id" data-pseudo="@i.pseudo">
                     <!-- Abonnés en attente de conseil -->
                     <td>@Html.LinkButtonForModal("recherche", i.pseudo, false)</td>
                     <td>@i.nbPhotoVetement</td>
@@ -56,5 +56,6 @@ else if (Model.premiereListe.attenteConseil != null)
         </tbody>
     </table>
 }
-else { <text>Aucune information !</text> }
+else
+{ <text>Aucune information !</text> }
 <div id="modalPopup"></div>

@@ -130,15 +130,18 @@ namespace ConseilApp.Controllers
         }
 
         [Authorize]
-        public PartialViewResult AffichePhotosVetement(string style, string vetement)
+        public PartialViewResult AffichePhotosVetement(string style, string vetement, int? personne = null)
         {
             int vetementId = string.IsNullOrEmpty(vetement) ? 0 : Convert.ToInt32(vetement);
             int styleId = string.IsNullOrEmpty(style) ? 0 : Convert.ToInt32(style);
             List<string> UrlListe = new List<string>();
+
+            int personneId = personne.HasValue ? personne.Value : base.PersonneId;
+
             if (vetementId > 0)
-                UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyleVetement(base.PersonneId, styleId, vetementId));
+                UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyleVetement(personneId, styleId, vetementId));
             else
-                UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyle(base.PersonneId, PhotoType.Vetement, styleId));
+                UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Vetement, styleId));
 
             if (UrlListe.Count > 0)
             {

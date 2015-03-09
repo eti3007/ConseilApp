@@ -225,6 +225,7 @@
     <Compile Include="Models\Photo\PhotoViewModel.cs" />
     <Compile Include="Models\Recherche\RechercheModel.cs" />
     <Compile Include="Models\Recherche\RechercheObjects.cs" />
+    <Compile Include="Models\Recherche\RechercheReponseModel.cs" />
     <Compile Include="Models\Shared\MenuViewModel.cs" />
     <Compile Include="Models\Upload\UploadHabillageViewModel.cs" />
     <Compile Include="Models\Upload\UploadPhotoViewModel.cs" />
@@ -399,6 +400,7 @@
     <Content Include="Views\Recherche\_ListeEnSoutien.cshtml" />
     <Content Include="Views\Recherche\Demandes.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\_ModalView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

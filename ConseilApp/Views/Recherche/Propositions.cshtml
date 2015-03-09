@@ -1,4 +1,5 @@
 ﻿@model ConseilApp.Models.Recherche.RechercheModel
+@using ConseilApp.Helpers
 @{
     Layout = "~/Views/Shared/_master.cshtml";
 }
@@ -34,3 +35,117 @@
         </div>
     </div>
 </div>
+
+<input type="hidden" id="hdIdentifier" value="" />
+
+@section Scripts {
+    @Styles.Render("~/Content/SlideCss")
+    @Scripts.Render("~/bundles/CarouselJs")
+
+    <script type="text/javascript">
+    $(function () {
+
+        $('tr.row-Modal').click(function (event) {
+            var modalPopup = '@Html.ModalShow("recherche", "Visualiser les photos habillées", "test", true)';
+            
+            // récupère l'id de la personne, le pseudo et le texte pour le bouton de validation
+            var id = $(this).attr('data-identifier');
+            var pseudo = $(this).attr('data-pseudo');
+            var btnText = $(this).parents('table').attr('data-validemessage') + pseudo;
+            var styleId = '';
+            var isHabillage = $(this).hasClass("habillage");
+
+            if (@ViewBag.RechercheStyleEncours != undefined) {
+                styleId = '@ViewBag.RechercheStyleEncours';
+            }
+
+            if (id != undefined) {
+                var datas = "\r\n";
+
+                $('#hdIdentifier').val(id);
+                var url = '';
+                if (isHabillage) {
+                    url = '@Url.Action("AffichePhotosHabillage", "Upload")';
+                    var jqxhr = $.ajax({
+                        url: url,
+                        cache: true,
+                        type: 'GET',
+                        data: { style: styleId, personne: id }
+                    })
+                    .success(function (data) { GestionModal($(this), data, btnText, pseudo); })
+                    .fail(function () { alert("Une erreur est survenue lors de la récupération des photos !"); });
+                }
+                else {
+                    url = '@Url.Action("AffichePhotosVetement", "Upload")'; 
+                    console.log('tata');
+                    var jqxhr = $.ajax({
+                        url: url,
+                        cache: true,
+                        type: 'GET',
+                        data: { style: styleId, vetement: 0, personne: id }
+                    })
+                    .success(function (data) { 
+
+                        GestionModal($(this), data, btnText, pseudo, modalPopup); })
+                    .fail(function () { alert("Une erreur est survenue lors de la récupération des photos !"); });
+                }
+            }
+        });
+
+        function GestionModal($element, datas, btnText, pseudo, contentPopup){
+            if (datas != "\r\n") {
+                console.log(datas); 
+                
+
+                contentPopup = contentPopup.replace('test',datas);
+                $('div.container-fluid').add(contentPopup);
+                
+                console.log(contentPopup);
+
+                // Charge le code HTML de la popup modal dans la div
+                //$('#recherche').html(contentPopup);
+
+                // IMPORTANT : permet d'agrandir la popup
+                $('#recherche').css("width", "697px");
+
+                $('#recherche div.modal-body').html(datas);
+
+                console.log($('div.modal-body').html());
+                // Complète le titre de la popup
+                var title = $('#recherche div.modal-header #myModalLabel').html();
+                $('#recherche div.modal-header #myModalLabel').html(title + ' de ' + pseudo);
+
+                // Ajoute le bouton de validation
+                var footerContent = $('#recherche div.modal-footer').html();
+                $('#recherche div.modal-footer').html("<input class='btn btn-success' style='float:left' type='submit' value='" + btnText + "'>" + footerContent);
+
+                CarouselHorizontalSetting();
+
+                // calcul automatique du width du carousel
+                UpdateWidthForInLinePictures(488);
+
+                // enlève les évènements de suppression sur les images
+                $('#mycarousel tr').each(function () {
+                    var obj = $element.find('td');
+                    // supprime le premier td qui contient le texte Supprimer
+                    if (obj.html() == "<span class=\"text-info\">Supprimer</span>") { $element.remove(); }
+                    else {
+                        $element.unbind("click");
+                        $element.attr("onclick", "");
+                    }
+                });
+                $('#mycarousel td').each(function () {
+                    $element.unbind("click");
+                    $element.attr("onclick", "");
+                });
+
+                console.log($('#recherche').html());
+
+                // affiche la popup modal
+                $('#recherche').modal('show');
+            }
+            else { alert("Aucune photo disponible !"); }
+        }
+    });
+</script>
+}
