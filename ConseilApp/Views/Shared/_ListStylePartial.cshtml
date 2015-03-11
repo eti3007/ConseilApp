@@ -11,13 +11,13 @@
             {
                 if (i == 0)
                 {
-                    <div class="item active" data-id="@i">
+                    <div class="item active" data-id="@lstStyle[i].Id">
                         <h4>@lstStyle[i].Nom</h4>
                     </div>
                 }
                 else
                 {
-                    <div class="item" data-id="@i">
+                    <div class="item" data-id="@lstStyle[i].Id">
                         <h4>@lstStyle[i].Nom</h4>
                     </div>
                 }
@@ -41,11 +41,11 @@
     $(function () {
         $('.carousel').carousel('pause');
         $('.carousel').bind('slide.bs.carousel', function (e) {
-            console.log($('.carousel div.active').attr('data-id'));
+            console.log('avant : ' + $('.carousel div.active').attr('data-id'));
         });
 
         $('.carousel').bind('slid', function (e) {
-            console.log($('.carousel div.active').attr('data-id'));
+            console.log('après : ' + $('.carousel div.active').attr('data-id'));
             var page = '@ViewBag.Page';
             var text = $('.carousel div.active').text().trim();
             var id = $('.carousel div.active').attr('data-id');

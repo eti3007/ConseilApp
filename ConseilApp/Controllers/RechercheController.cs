@@ -66,11 +66,11 @@ namespace ConseilApp.Controllers
         public PartialViewResult RecherchePartial(int style, string partialName, string pageName)
         {
             ViewBag.RechercheStyleEncours = style;
-            return PartialView(partialName, GetRechercheModel(style, (pageName.Equals("Demandes"))));
+            return PartialView(partialName, GetRechercheModel(style, (pageName.Equals("Demandes")), partialName));
         }
 
         #region METHODES PRIVEES
-        private RechercheModel GetRechercheModel(int style, bool demande = true)
+        private RechercheModel GetRechercheModel(int style, bool demande = true, string partialToUpd = "")
         {
             // créer l'objet du model
             RechercheModel recherche = GenereNewModel();
@@ -78,21 +78,39 @@ namespace ConseilApp.Controllers
             // initialise style et personne Id
             this._RechercheBuilder.SetPersonneStyleIdentifier(base.PersonneId, style);
 
-            if (demande)
-            {
-                // récupère la liste des attentes
-                recherche.premiereListe.apteConseil = _RechercheBuilder.DemandeAbonnePeutAider();
+            if (demande) {
+                if (partialToUpd.Equals("_ListeEnAttente")) {
+                    // récupère la liste des attentes
+                    recherche.premiereListe.apteConseil = _RechercheBuilder.DemandeAbonnePeutAider(); 
+                }
+                else if (partialToUpd.Equals("_ListeEnSoutien")) {
+                    // récupère la liste des soutiens
+                    recherche.deuxiemeListe.proposeAide = _RechercheBuilder.DemandeAbonneProposeAider(); 
+                }
+                else {
+                    // récupère la liste des attentes
+                    recherche.premiereListe.apteConseil = _RechercheBuilder.DemandeAbonnePeutAider();
 
-                // récupère la liste des soutiens
-                recherche.deuxiemeListe.proposeAide = _RechercheBuilder.DemandeAbonneProposeAider();
+                    // récupère la liste des soutiens
+                    recherche.deuxiemeListe.proposeAide = _RechercheBuilder.DemandeAbonneProposeAider();
+                }
             }
-            else
-            {
-                // récupère la liste des attentes
-                recherche.premiereListe.attenteConseil = _RechercheBuilder.PropositionAbonneAttenteConseil();
+            else {
+                if (partialToUpd.Equals("_ListeEnAttente")) {
+                    // récupère la liste des attentes
+                    recherche.premiereListe.attenteConseil = _RechercheBuilder.PropositionAbonneAttenteConseil();
+                }
+                else if (partialToUpd.Equals("_ListeEnSoutien")) {
+                    // récupère la liste des soutiens
+                    recherche.deuxiemeListe.solliciteAide = _RechercheBuilder.PropositionAbonneSolliciteAide();
+                }
+                else {
+                    // récupère la liste des attentes
+                    recherche.premiereListe.attenteConseil = _RechercheBuilder.PropositionAbonneAttenteConseil();
 
-                // récupère la liste des soutiens
-                recherche.deuxiemeListe.solliciteAide = _RechercheBuilder.PropositionAbonneSolliciteAide();
+                    // récupère la liste des soutiens
+                    recherche.deuxiemeListe.solliciteAide = _RechercheBuilder.PropositionAbonneSolliciteAide();
+                }
             }
 
             return recherche;
