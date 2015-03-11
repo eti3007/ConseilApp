@@ -100,6 +100,7 @@
 
     <script type="text/javascript">
         function ChargeImages(xstyle, xvetement) {
+            // MAJ la liste des photos de vêtement :
             var url = '@Url.Action("AffichePhotosVetement", "Upload")';
             var jqxhr = $.ajax({
                 cache: false,
@@ -119,6 +120,16 @@
             .fail(function () {
                 alert("Une erreur est survenue, nous mettons tout en oeuvre pour résoudre ce problème !");
             });
+
+            // MAJ la checkbox du statut actuel de la personne par rapport au style sélectionné :
+            url = '@Url.Action("RecupereStatutStyle", "Upload")';
+            jqxhr = $.ajax({
+                cache: false, type: "GET", url: url, data: { style: xstyle }
+            }).success(function (data) {
+                if (data == 'true') { $('#fsVetement input:checkbox').prop('checked', true); }
+                else { $('#fsVetement input:checkbox').prop('checked', false); }
+            }).fail(function () { $('#fsVetement input:checkbox').prop('checked', false); });
+
         }
 
 
@@ -178,5 +189,20 @@
                 alert("Une erreur est survenue, nous mettons tout en oeuvre pour résoudre ce problème !");
             });
         }
+
+
+        //**************************************************************************************************
+
+        function AppliqueStatutPourUnStyle(vStyle, enAttente) {
+            var url = '@Url.Action("AppliqueStatutStyle","Upload")';
+            var jqxhr = $.ajax({
+                cache: false,
+                type: "POST",
+                url: url,
+                data: { style: vStyle, attente : enAttente }
+            })
+            .fail(function () { alert("Une erreur est survenue, nous mettons tout en oeuvre pour résoudre ce problème !"); })
+        }
+
     </script>
 }

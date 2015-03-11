@@ -17,16 +17,14 @@ namespace ConseilApp.Controllers
         private IVetementService _VetementService;
         private IStatutHistoriqueService _StatutHistoriqueService;
         private IPhotoService _PhotoService;
-        private IPhotoBuilder _PhotoBuilder;
 
-        public UploadController(IPhotoBuilder PhotoBuilder, IPhotoService PhotoService,
+        public UploadController(IPhotoService PhotoService,
                                 IStyleService StyleService, IVetementService VetementService, IStatutHistoriqueService StatutHistoriqueService)
         {
             this._StyleService = StyleService;
             this._VetementService = VetementService;
             this._StatutHistoriqueService = StatutHistoriqueService;
             this._PhotoService = PhotoService;
-            this._PhotoBuilder = PhotoBuilder;
         }
 
         [Authorize]
@@ -139,13 +137,15 @@ namespace ConseilApp.Controllers
             int personneId = personne.HasValue ? personne.Value : base.PersonneId;
 
             if (vetementId > 0)
-                UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyleVetement(personneId, styleId, vetementId));
+                UrlListe = this._PhotoService.RecuperePhotosPourPersonneStyleVetement(personneId, styleId, vetementId).Select(p => p.Url).ToList();
+                //UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyleVetement(personneId, styleId, vetementId));
             else
-                UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Vetement, styleId));
+                UrlListe = this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Vetement, styleId).Select(p => p.Url).ToList();
+                //UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Vetement, styleId));
 
             if (UrlListe.Count > 0)
             {
-                var fileUpload = new FileUpload(base.PersonneId, styleId, true);
+                var fileUpload = new FileUpload(personneId, styleId, true);
                 UrlListe = fileUpload.CompleteUrlPicture(UrlListe, true);
                 fileUpload = null;
             }
@@ -164,7 +164,7 @@ namespace ConseilApp.Controllers
 
             int personneId = !string.IsNullOrEmpty(personne) ? Convert.ToInt32(personne) : base.PersonneId;
 
-            UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Habille, styleId));
+            UrlListe = this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Habille, styleId).Select(p => p.Url).ToList();
 
             if (UrlListe.Count > 0)
             {
@@ -243,6 +243,19 @@ namespace ConseilApp.Controllers
             }
 
             return result;
+        }
+
+        [HttpPost]
+        public void AppliqueStatutStyle(string style, bool attente)
+        {
+            // appelle la méthode de mise à jour du statut :
+            _StatutHistoriqueService.MajStyleStatutByPersonne(base.PersonneId, Convert.ToInt32(style), attente);
+        }
+
+        [HttpGet]
+        public string RecupereStatutStyle(string style)
+        {
+            return (this._StatutHistoriqueService.RecupereStatusPourPersonneEtStyle(base.PersonneId, Convert.ToInt32(style)) == (int)PersonneStatus.EnAttente).ToString().ToLower(); 
         }
     }
 }

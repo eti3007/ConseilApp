@@ -36,5 +36,32 @@ namespace ConseilREP
             }
             return result;
         }
+
+        /// <summary>
+        /// Met à jour le statut d'une personne pour un style particulier
+        /// </summary>
+        public void UpdateStatutByStyle(int personneId, int styleId, bool enAttente)
+        {
+            using (var context = new ConseilEntitiesBis())
+            {
+                try { 
+                    // récupère l'enregistrement concerné :
+                    StatutHistorique objStatutHisto = context.StatutHistoriques.Where(s => s.PersonneId.Equals(personneId) && s.StyleId.Equals(styleId)).FirstOrDefault();
+
+                    if (objStatutHisto == null) { return; }
+
+                    // applique la modification du statut (TypeId)
+                    objStatutHisto.TypeId = enAttente ? (int)PersonneStatus.EnAttente : (int)PersonneStatus.Abonne;
+
+                    // sauvegarde
+                    context.Entry(objStatutHisto).State = EntityState.Modified;
+                    context.SaveChanges();                
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    throw new CustomException().CustomValidationExceptionReturn(ex);
+                }
+            }
+        }
     }
 }

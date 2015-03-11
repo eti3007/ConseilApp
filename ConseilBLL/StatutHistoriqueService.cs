@@ -22,5 +22,10 @@ namespace ConseilBLL
         {
             return repository.GetPersonStyleStatus(personneId, styleId);
         }
+
+        public void MajStyleStatutByPersonne(int personneId, int styleId, bool enAttente)
+        {
+            repository.UpdateStatutByStyle(personneId, styleId, enAttente);
+        }
     }
 }

@@ -42,6 +42,7 @@ namespace ConseilBLL.Interfaces
     public interface IStatutHistoriqueService
     {
         int RecupereStatusPourPersonneEtStyle(int personneId, int styleId);
+        void MajStyleStatutByPersonne(int personneId, int styleId, bool enAttente);
     }
 
     public interface IPhotoService

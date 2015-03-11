@@ -63,6 +63,21 @@ function ListeActions(selectorA, selectorB) {
         if (selectorA == '#fsVetement') { ChargeImages(vStyle, vVetement); }
         else { ChargeImagesHabillage(vStyle); }
     }
+
+    // place un évènement sur la checkbox
+    $(selectorA + ' input:checkbox').click(function () {
+        // récupère le style en cours :
+        var vStyle = $(selectorB + 'Style option:selected').val();
+
+        // récupère la valeur de la checkbox :
+        var enAttente = $(this).prop('checked');
+
+        // Appelle la méthode JS pour mettre à jour le statut de l'abonné pour le style sélectionné :
+        if (vStyle != undefined && vStyle != '' && enAttente != undefined && enAttente != '') {
+            console.log(vStyle + '  ' + enAttente);
+            AppliqueStatutPourUnStyle(vStyle, enAttente);
+        }
+    });
 }
 
 function PrepareInputFile(selectorA, selectorB) {

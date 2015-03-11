@@ -43,10 +43,10 @@ namespace ConseilApp.Controllers
             var menus = new List<Menu>();
 
             menus.Add(new Menu() { Controller = "Home", Action = "Index", PageName = "Home", Texte = "Home" });
-            if (statut > 1)
-                menus.Add(new Menu() { Controller = "Recherche", Action = "Demandes", PageName = "Demande", Texte = "Mes demandes" });
+            if (statut > 0)
+                menus.Add(new Menu() { Controller = "Recherche", Action = "Demandes", PageName = "Demandes", Texte = "Mes demandes" });
             if (statut > 2)
-                menus.Add(new Menu() { Controller = "Recherche", Action = "Propositions", PageName = "Proposition", Texte = "Mes propositions" });
+                menus.Add(new Menu() { Controller = "Recherche", Action = "Propositions", PageName = "Propositions", Texte = "Mes propositions" });
             menus.Add(new Menu() { Controller = "Home", Action = "About", PageName = "About", Texte = "A propos" });
             menus.Add(new Menu() { Controller = "Home", Action = "Contact", PageName = "Contact", Texte = "Contactez nous" });
                         
