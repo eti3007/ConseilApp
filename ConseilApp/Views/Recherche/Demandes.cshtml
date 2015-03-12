@@ -45,82 +45,20 @@
     @Styles.Render("~/Content/SlideCss")
     @Scripts.Render("~/bundles/CarouselJs")
 
-<script type="text/javascript">
-    $(function () {
+    <script type="text/javascript">
+        $(function () {
+            $('#ModalContainer').html('@Html.ModalShow("recherche", "Visualiser les photos habillées", "test", true)');
 
-        $('tr.row-Modal').click(function (event) {
-            var modalPopup = '@Html.ModalShow("recherche", "Visualiser les photos habillées", "test", true)';
-
-            // récupère l'id de la personne, le pseudo et le texte pour le bouton de validation
-            var id = $(this).attr('data-identifier');
-            var pseudo = $(this).attr('data-pseudo');
-            var btnText = $(this).parents('table').attr('data-validemessage') + pseudo;
-            var styleId = '';
-            
-            if (@ViewBag.RechercheStyleEncours != undefined) {
-                console.log('before');
-                styleId = '@ViewBag.RechercheStyleEncours';
-                console.log('after');
-            }
-
-            if (id != undefined) {
-                $('#hdIdentifier').val(id);
-
-                var url = '@Url.Action("AffichePhotosHabillage", "Upload")';
-                var jqxhr = $.ajax({
-                    url: url,
-                    cache: true,
-                    type: 'GET',
-                    data: { style: styleId, personne: id }
-                })
-                .success(function (data) {
-                    if (data != "\r\n") {
-                        // Charge le code HTML de la popup modal dans la div
-                        $('#modalPopup').html(modalPopup);
-
-                        // IMPORTANT : permet d'agrandir la popup
-                        $('#recherche').css("width", "697px");
-
-                        $('#recherche div.modal-body').html(data);
-
-                        // Complète le titre de la popup
-                        var title = $('#recherche div.modal-header #myModalLabel').html();
-                        $('#recherche div.modal-header #myModalLabel').html(title + ' de ' + pseudo);
-
-                        // Ajoute le bouton de validation
-                        var footerContent = $('#recherche div.modal-footer').html();
-                        $('#recherche div.modal-footer').html("<input class='btn btn-success' style='float:left' type='submit' value='" + btnText + "'>" + footerContent);
-
-                        CarouselHorizontalSetting();
-
-                        // calcul automatique du width du carousel
-                        UpdateWidthForInLinePictures(488);
-
-                        // enlève les évènements de suppression sur les images
-                        $('#mycarousel tr').each(function () {
-                            var obj = $(this).find('td');
-                            // supprime le premier td qui contient le texte Supprimer
-                            if (obj.html() == "<span class=\"text-info\">Supprimer</span>") { $(this).remove(); }
-                            else {
-                                $(this).unbind("click");
-                                $(this).attr("onclick", "");
-                            }
-                        });
-                        $('#mycarousel td').each(function () {
-                            $(this).unbind("click");
-                            $(this).attr("onclick", "");
-                        });
-
-                        // affiche la popup modal
-                        $('#recherche').modal('show');
-                    }
-                    else { alert("Aucune photo disponible !"); }
-                })
-                .fail(function () {
-                    alert("Une erreur est survenue lors de la récupération des photos !");
-                });
-            }
+            var div = $("div.accordion")[0];
+            $.data(div, "urlRecherche", {
+                urlHabillage: '@Url.Action("AffichePhotosHabillage", "Upload")',
+                urlVetement: '@Url.Action("AffichePhotosVetement", "Upload")'
+            });
+            $.data(div, "styleEnCours", {
+                styleId: '@ViewBag.RechercheStyleEncours'
+            });
         });
-    });
-</script>
+    </script>
+    
+    @Scripts.Render("~/bundles/RechercheJs")
 }

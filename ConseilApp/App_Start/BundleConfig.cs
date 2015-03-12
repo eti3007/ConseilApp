@@ -40,6 +40,8 @@ namespace ConseilApp
             bundles.Add(new ScriptBundle("~/bundles/CarouselJs").Include(
                 "~/Scripts/jquery.jcarousel.js",
                 "~/Scripts/Custom/Carousel.js"));
+            bundles.Add(new ScriptBundle("~/bundles/RechercheJs").Include(
+                "~/Scripts/Custom/Recherche.js"));
 
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

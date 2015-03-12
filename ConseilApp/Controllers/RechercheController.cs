@@ -137,5 +137,11 @@ namespace ConseilApp.Controllers
 
             return new PartialViewResult();     // View();
         }
+
+        [HttpPost]
+        public string ValiderAide(int? conseilId, int? demandeurId, int? conseillerId, int styleId)
+        {
+            return "";
+        }
     }
 }

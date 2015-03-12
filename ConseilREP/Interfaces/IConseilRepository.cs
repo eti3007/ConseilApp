@@ -5,6 +5,7 @@ namespace ConseilREP.Interfaces
 {
     public interface IConseilRepository
     {
-        bool AddDressingDemand(int styleId, int consultantId, int personneId);
+        bool AddDressingDemand(int styleId, int conseillerId, int demandeurId, int vTypeId, int typeNotification);
+        bool UpdDressingDemand(int conseilId, int styleId, int conseillerId, int demandeurId, int vTypeId, int typeNotification);
     }
 }

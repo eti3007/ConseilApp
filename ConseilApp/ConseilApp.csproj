@@ -328,6 +328,7 @@
     <Content Include="Images\Tests\IMG_0750.JPG" />
     <Content Include="Scripts\Custom\Carousel.js" />
     <Content Include="Scripts\Custom\Menu.js" />
+    <Content Include="Scripts\Custom\Recherche.js" />
     <Content Include="Scripts\Custom\UploadPhotos.js" />
     <Content Include="Scripts\jquery-1.8.2_old.js" />
     <Content Include="Scripts\jquery-1.8.2_old.min.js" />

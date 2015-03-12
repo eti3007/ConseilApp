@@ -41,14 +41,20 @@
     $(function () {
         $('.carousel').carousel('pause');
         $('.carousel').bind('slide.bs.carousel', function (e) {
-            console.log('avant : ' + $('.carousel div.active').attr('data-id'));
+            //console.log('avant : ' + $('.carousel div.active').attr('data-id'));
         });
 
         $('.carousel').bind('slid', function (e) {
-            console.log('après : ' + $('.carousel div.active').attr('data-id'));
+            //console.log('après : ' + $('.carousel div.active').attr('data-id'));
             var page = '@ViewBag.Page';
             var text = $('.carousel div.active').text().trim();
             var id = $('.carousel div.active').attr('data-id');
+
+            // sauvegarde le style en cours :
+            var div = $("div.accordion")[0];
+            $.data(div, "styleEnCours", {
+                styleId: id
+            });
 
             // Attente :
             var url = '@Url.Action("RecherchePartial", "Recherche")';
@@ -56,7 +62,8 @@
             .success(function (data) {
                 if (data != "\r\n") {
                     $('#dvAttente').html(data);
-                    console.log(page + ' | attente : ' + data);
+                    // attache l'évènement click à la méthode du fichier Recherche.js
+                    $('#dvAttente tr.row-Modal').click(function (event) { EventRowClick($(this)); });
                 }
                 else { alert('erreur chargement : ' + page); }
             });
@@ -67,7 +74,7 @@
             .success(function (data) {
                 if (data != "\r\n") {
                     $('#dvSoutien').html(data);
-                    console.log(page + ' | soutien : ' + data);
+                    $('#dvSoutien tr.row-Modal').click(function (event) { EventRowClick($(this)); });
                 }
                 else { alert('erreur chargement : ' + page); }
             });
