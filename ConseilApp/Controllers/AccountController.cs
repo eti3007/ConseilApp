@@ -89,6 +89,8 @@ namespace ConseilApp.Controllers
         {
             WebSecurity.Logout();
 
+            base.ResetSession();
+
             return RedirectToAction("Index", "Home");
         }
 

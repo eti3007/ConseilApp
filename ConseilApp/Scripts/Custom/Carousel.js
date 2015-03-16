@@ -25,3 +25,20 @@ function UpdateWidthForInLinePictures(minWidth, selector) {
         else { jQuery(divMaitre + '#mycarousel').width(minWidth); }
     }
 }
+
+// fonction qui retire toutes les lignes qui contiennent le lien Supprimer :
+function RemoveDeleteLink()
+{
+    $('#mycarousel tr td').each(function (index,value) {
+
+        var attr = $(this).attr('onclick');
+
+        if (typeof attr !== typeof undefined && attr !== false) {
+            $(this).removeAttr('onclick');
+        }
+
+        if ($(this).html() == "<span class=\"text-info\">Supprimer</span>") {
+            $(this).html("");
+        }
+    });
+}

@@ -31,7 +31,7 @@ namespace ConseilREP
                     result = this.SendOneNotification(styleId, consultantId, conseilId, ConstantMessages.MSG_REFUSE_PROPOSITION_CONSEILLER);
                     break;
                 case NotifType.PropositionCreation: // {0} vous propose son aide pour le style {1}       Votre proposition d'aide a été envoyé à {0}
-                    result = SendTwoNotifications(styleId, personneId, consultantId, conseilId, ConstantMessages.MSG_ENVOI_PROPOSITION_DEMANDEUR,
+                    result = SendTwoNotifications(styleId, consultantId, personneId, conseilId, ConstantMessages.MSG_ENVOI_PROPOSITION_DEMANDEUR,
                                     ConstantMessages.MSG_ENVOI_PROPOSITION_CONSEILLER);
                     break;
                 case NotifType.DemandAccept: // {0} a accepté de vous aider pour le style {1}
@@ -44,11 +44,25 @@ namespace ConseilREP
             return result;
         }
 
-        //public List<Notification> GetDemandNotifications(int styleId, int personneId)
-        //{ }
+        /// <summary>
+        /// Liste des notifications (Message) dont le TypeId==7 du plus récent au plus ancien pour un style
+        /// </summary>
+        public List<Notification> GetNotificationsByPersonne(int styleId, int personneId)
+        {
+            List<Notification> result = new List<Notification>();
+            using (var context = new ConseilEntitiesBis())
+            {
+                result = (from n in context.Notifications
+                                     join c in context.Conseils on n.ConseilId equals c.Id
+                                     where c.StyleId == styleId && n.PersonneId == personneId
+                                     orderby n.DateCreation descending
+                                     //select new { Id = n.Id, Message = n.Message, DateNotif = n.DateCreation, ConseilId = n.ConseilId }
+                                     select n
+                                    ).ToList();
 
-        //public List<Notification> GetPropositionNotifications(int styleId, int consultantId)
-        //{ }
+            }
+            return result;
+        }
 
 
         private bool SendOneNotification(int styleId, int personneId, int conseilId, string message)
@@ -147,8 +161,6 @@ namespace ConseilREP
         /// <summary>
         /// Ajoute dans la base la notification
         /// </summary>
-        /// <param name="notification">le message</param>
-        /// <returns>succès/echec</returns>
         private bool AddNotification(ConseilEntitiesBis context, ref Notification notification)
         {
             bool result = true;

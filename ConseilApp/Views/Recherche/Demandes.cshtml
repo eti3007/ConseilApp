@@ -52,7 +52,9 @@
             var div = $("div.accordion")[0];
             $.data(div, "urlRecherche", {
                 urlHabillage: '@Url.Action("AffichePhotosHabillage", "Upload")',
-                urlVetement: '@Url.Action("AffichePhotosVetement", "Upload")'
+                urlVetement: '@Url.Action("AffichePhotosVetement", "Upload")',
+                urlAction: '@Url.Action("ActionAbonne","Recherche")',
+                pageName: '@ViewBag.Page'
             });
             $.data(div, "styleEnCours", {
                 styleId: '@ViewBag.RechercheStyleEncours'

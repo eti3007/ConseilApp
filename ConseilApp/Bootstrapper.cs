@@ -38,10 +38,12 @@ namespace ConseilApp
         container.RegisterType<ISuiviTelechargementService, SuiviTelechargementService>();
         container.RegisterType<ITypeVetementService, TypeVetementService>();
         container.RegisterType<IVetementService, VetementService>();
+        container.RegisterType<IConseilService, ConseilService>();
+        container.RegisterType<INotificationService, NotificationService>();
  
         // Repository :
         container.RegisterType<IConseilRepository,ConseilRepository>();
-        container.RegisterType<INotificationRepository,NotificationRepository>();
+        container.RegisterType<INotificationRepository, NotificationRepository>();
         container.RegisterType<IPersonneRepository,PersonneRepository>();
         container.RegisterType<IPhotoRepository,PhotoRepository>();
         container.RegisterType<IStyleRepository,StyleRepository>();

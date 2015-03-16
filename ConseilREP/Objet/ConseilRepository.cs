@@ -18,7 +18,7 @@ namespace ConseilREP
         /// ajoute une demande ou une proposition d'aide
         /// Dans la BLL il faut passer le bon type de notifiation par rapport à la vue sur laquelle se trouve l'abonné : Mes demandes ou Mes propositions
         /// </summary>
-        public bool AddDressingDemand(int styleId, int conseillerId, int demandeurId, int vTypeId, int typeNotification)
+        public bool AddDressingDemand(int styleId, int conseillerId, int demandeurId, int statut, int typeNotification)
         {
             bool result = true;
             Conseil conseil = null;
@@ -31,7 +31,7 @@ namespace ConseilREP
                         ConseillerId = conseillerId,
                         DemandeurId = demandeurId,
                         DateCreation = DateTime.Now,
-                        TypeId = vTypeId,
+                        TypeId = statut,
                         StyleId = styleId,
                         DateLimite = DateTime.Now.AddDays(7)
                     };
@@ -69,7 +69,7 @@ namespace ConseilREP
         /// Dans la BLL il faut récupérer le type de notification appliquée lors de la création du conseil pour savoir lequel passer en
         /// paramètre dans le cas d'une acceptation ou d'un refus
         /// </summary>
-        public bool UpdDressingDemand(int conseilId, int styleId, int conseillerId, int demandeurId, int vTypeId, int typeNotification)
+        public bool UpdDressingDemand(int conseilId, int styleId, int conseillerId, int demandeurId, int statut, int typeNotification)
         {
             bool result = true;
 
@@ -80,7 +80,7 @@ namespace ConseilREP
                                                               c.DemandeurId.Equals(demandeurId) &&
                                                               c.ConseillerId.Equals(conseillerId) &&
                                                               c.StyleId.Equals(styleId)).FirstOrDefault();
-                    if (conseil != null) { conseil.TypeId = vTypeId; }
+                    if (conseil != null) { conseil.TypeId = statut; }
 
                     context.Entry(conseil).State = EntityState.Modified;
                     context.SaveChanges();
@@ -109,6 +109,39 @@ namespace ConseilREP
             #endregion
 
             return result;
+        }
+
+        /// <summary>
+        /// Retourne un conseil selon son identifiant
+        /// </summary>
+        /// <param name="conseilId"></param>
+        /// <returns>objet conseil</returns>
+        public Conseil GetById(int conseilId)
+        {
+            using (var context = new ConseilEntitiesBis())
+            {
+                return context.Conseils.AsQueryable().Where(c => c.Id == conseilId).FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// Vérifie si une conseil n'eciste pas déjà avec les identifiants suivants
+        /// </summary>
+        /// <param name="styleId">identifiant du style</param>
+        /// <param name="conseillerId">identifiant du conseiller</param>
+        /// <param name="demandeurId">identifiant du demandeur</param>
+        /// <param name="statut">identifiant du statut du conseil</param>
+        /// <returns>valeur booléenne</returns>
+        public bool ExistConseilByIds(int styleId, int conseillerId, int demandeurId, int statut)
+        {
+            using (var context = new ConseilEntitiesBis())
+            {
+                return context.Conseils.AsQueryable()
+                        .Any(c => c.StyleId == styleId && 
+                                    c.DemandeurId == demandeurId && 
+                                    c.ConseillerId == conseillerId && 
+                                    c.TypeId == statut);
+            }
         }
 
         public void Dispose()

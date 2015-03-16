@@ -60,4 +60,14 @@ namespace ConseilBLL.Interfaces
         List<Vetement> RecupereListeDesVetements();
         List<DropDownListeVetement> RecupereListeDesVetementsPourDDL();
     }
+
+    public interface IConseilService
+    {
+        void AppliqueActionAbonne(int? conseilId, int? demandeurId, int? conseillerId, int styleId, bool pageDemande);
+    }
+
+    public interface INotificationService
+    {
+        List<Notification> RecupereListeNotification(int styleId, int personneId);
+    }
 }

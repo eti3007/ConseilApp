@@ -81,6 +81,7 @@ namespace ConseilApp.Builders
                     proposeAide.nbHabPropose = elem.NumberC;
                     proposeAide.note = elem.Note;
                     if (!string.IsNullOrEmpty(elem.Genre)) proposeAide.genre = Convert.ToChar(elem.Genre);
+                    if (elem.ConseilId.HasValue) proposeAide.conseilId = elem.ConseilId.Value;
 
                     result.Add(proposeAide);
                 }
@@ -137,6 +138,7 @@ namespace ConseilApp.Builders
                     solliciteAide.nbPhotoVetement = elem.NumberA;
                     solliciteAide.nbPhotoHabille = elem.NumberB;
                     if (!string.IsNullOrEmpty(elem.Genre)) solliciteAide.genre = Convert.ToChar(elem.Genre);
+                    if (elem.ConseilId.HasValue) solliciteAide.conseilId = elem.ConseilId.Value;
 
                     result.Add(solliciteAide);
                 }

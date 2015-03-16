@@ -32,6 +32,7 @@ namespace ConseilApp.Models.Recherche
         public int nbAide { get; set; }
         public string note { get; set; }
         public int nbHabPropose { get; set; }
+        public int conseilId { get; set; }
     }
 
     /// <summary>
@@ -48,6 +49,7 @@ namespace ConseilApp.Models.Recherche
     public class SolliciteAide : BaseConseil
     {
         public int nbPhotoVetement { get; set; }
+        public int conseilId { get; set; }
     }
 
     public class BaseConseils

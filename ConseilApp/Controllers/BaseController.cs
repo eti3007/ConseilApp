@@ -84,7 +84,7 @@ namespace ConseilApp.Controllers
             menuRecherche
         }
 
-        public enum mnuIdentifiant
+        public enum mnuIdentifiant    // TODO : vérifier son utilisation ainsi que les cookies !!!!!
         {
             MesInfos=10,
             MesPhotos=20,
@@ -157,6 +157,16 @@ namespace ConseilApp.Controllers
             { return false; }
             else
             { return null; }
+        }
+
+        // méthode appelé lors du logOut :
+        public void ResetSession()
+        {
+            RemoveSession(SessionKey.ListeStyle);
+            RemoveSession(SessionKey.PersonneID);
+            RemoveSession(SessionKey.PersonnePseudo);
+            RemoveSession(SessionKey.PersonneStatut);
+
         }
     }
 }

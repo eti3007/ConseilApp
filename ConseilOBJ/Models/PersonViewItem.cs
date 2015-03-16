@@ -9,5 +9,6 @@
         public int NumberC { get; set; }
         public string Note { get; set; }
         public string Genre { get; set; }
+        public int? ConseilId { get; set; }
     }
 }

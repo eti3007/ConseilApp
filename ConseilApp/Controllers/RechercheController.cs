@@ -14,11 +14,13 @@ namespace ConseilApp.Controllers
 
         private IRechercheBuilder _RechercheBuilder;
         private IStyleService _StyleService;
+        private IConseilService _ConseilService;
 
-        public RechercheController(IStyleService StyleService, IRechercheBuilder RechercheBuilder)
+        public RechercheController(IStyleService StyleService, IRechercheBuilder RechercheBuilder, IConseilService ConseilService)
         {
             this._StyleService = StyleService;
             this._RechercheBuilder = RechercheBuilder;
+            this._ConseilService = ConseilService;
         }
 
         public ActionResult Index()
@@ -139,9 +141,25 @@ namespace ConseilApp.Controllers
         }
 
         [HttpPost]
-        public string ValiderAide(int? conseilId, int? demandeurId, int? conseillerId, int styleId)
+        public string ActionAbonne(int? conseilId, int? demandeurId, int? conseillerId, int styleId, string pageName)
         {
-            return "";
+            /*
+            - une demande d'aide et une proposition d'aide n'aura pas de valeur pour le paramètre conseilId
+            - l'acceptation d'une demande ou proposition d'aide aura une valeur pour le paramètre conseilId
+            */
+
+            bool isDemandePage = pageName.Equals("Demandes");
+
+            // récupère l'identifiant de l'abonné connecté :
+            if (isDemandePage) demandeurId = base.PersonneId;
+            else conseillerId = base.PersonneId;
+
+            // vérifie que les paramètres sont renseignés :
+            if (styleId <= 0 || !demandeurId.HasValue || !conseillerId.HasValue) return "Erreur de données dans les paramètres !";
+            
+            _ConseilService.AppliqueActionAbonne(conseilId, demandeurId, conseillerId, styleId, isDemandePage);
+
+            return "Succès";
         }
     }
 }

@@ -16,7 +16,7 @@
         <tbody>
             @foreach (var i in Model.deuxiemeListe.proposeAide)
             {
-                <tr class="row-Modal habillage" data-identifier="@i.id" data-pseudo="@i.pseudo">
+                <tr class="row-Modal habillage" data-identifier="@i.id" data-pseudo="@i.pseudo" data-type="d2" data-conseil="@i.conseilId">
                     <!-- Conseillers qui proposent leur aider -->
                     <td>@i.pseudo</td>
                     <td>@i.nbPhotoHabille</td>
@@ -43,7 +43,7 @@ else if (Model.deuxiemeListe.solliciteAide != null)
         <tbody>
             @foreach (var i in Model.deuxiemeListe.solliciteAide)
             {
-                <tr class="row-Modal vetement" data-identifier="@i.id" data-pseudo="@i.pseudo">
+                <tr class="row-Modal vetement" data-identifier="@i.id" data-pseudo="@i.pseudo" data-type="p2" data-conseil="@i.conseilId">
                     <!-- Abbonnés qui sollicitent de l'aide -->
                     <td>@i.pseudo</td>
                     <td>@i.nbPhotoVetement</td>

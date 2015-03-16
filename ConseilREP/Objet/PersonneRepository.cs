@@ -109,18 +109,20 @@ namespace ConseilREP
 
             using (var context = new ConseilEntitiesBis())
             {
+                // Récupère la liste des conseillers en cours d'aide pour cet abonné sur ce style :
+                var lstConseillerEnCours = context.Conseils.Where(c => c.StyleId == styleId &&
+                                           (c.TypeId == (int)DemandeStatus.AttenteDemandeur || c.TypeId == (int)DemandeStatus.Accepte) &&
+                                           c.DemandeurId == personneId).Select(c => c.ConseillerId).ToList();
+
                 // récupère les conseillers qui n'ont pas encore proposer leur aide à la personne connectée
                 var lstConseiller = (from p in context.Personnes
-                                     from c in context.Conseils
-                                             .Where(o => p.Id == o.ConseillerId && o.DemandeurId != personneId)
-                                             .DefaultIfEmpty()
                                      join ph in context.Photos on p.Id equals ph.PersonneId
                                      join sh in context.StatutHistoriques on p.Id equals sh.PersonneId
                                      where p.Id != personneId &&
-                                           sh.TypeId == (int)PersonneStatus.Conseiller &&
-                                           sh.StyleId == styleId
+                                           sh.TypeId == (int)PersonneStatus.Conseiller && sh.StyleId == styleId &&
+                                           !lstConseillerEnCours.Contains(p.Id)
                                      select new { Personne = p.Id, Pseudo = p.Pseudo, Genre = p.Genre }).Distinct().ToList();
-                
+
                 // récupère ceux 
                 result = new List<PersonViewItem>();
                 foreach (var v in lstConseiller)
@@ -147,11 +149,11 @@ namespace ConseilREP
                                             join c in context.Conseils on p.Id equals c.ConseillerId
                                             where c.TypeId == (int)DemandeStatus.AttenteDemandeur && c.ConseillerId != personneId &&
                                             c.DemandeurId == personneId && c.StyleId == styleId
-                                     select new { Personne = p.Id, Pseudo = p.Pseudo, Genre = p.Genre }).Distinct().ToList();
+                                     select new { Personne = p.Id, Pseudo = p.Pseudo, Genre = p.Genre, Conseil = c.Id }).Distinct().ToList();
 
                 result = new List<PersonViewItem>();
                 foreach (var v in lstConseiller)
-                    result.Add(GetListenerInfos(context, new PersonViewItem() { Id = v.Personne, Login = v.Pseudo, Genre = v.Genre }, styleId));
+                    result.Add(GetListenerInfos(context, new PersonViewItem() { Id = v.Personne, Login = v.Pseudo, Genre = v.Genre, ConseilId = v.Conseil }, styleId));
             }
 
             return result;
@@ -169,12 +171,24 @@ namespace ConseilREP
             List<PersonViewItem> result = null;
             using (var context = new ConseilEntitiesBis())
             {
+                // récupère la liste des abonnés en attente d'aide pour un style :
                 var lstAbonnes = (from p in context.Personnes.Include("StatutHistoriques")
                                   where p.StatutHistoriques.Where(o => o.StyleId == styleId && o.TypeId == (int)PersonneStatus.EnAttente).Count() > 0
                                   select new { Personne = p.Id, Pseudo = p.Pseudo, Genre = p.Genre }).Distinct().ToList();
 
+                // récupère la liste des abonnés pour qui le conseiller a une aide en cours
+                var lstAideEnCours = (from c in context.Conseils
+                                      join p in context.Personnes on c.DemandeurId equals p.Id
+                                      where c.StyleId==styleId && c.ConseillerId == personneId && 
+                                      (c.TypeId == (int)DemandeStatus.AttenteDemandeur || c.TypeId == (int)DemandeStatus.Accepte)
+                                      select new { Personne = p.Id, Pseudo = p.Pseudo, Genre = p.Genre }).Distinct().ToList();
+
+
+
                 result = new List<PersonViewItem>();
                 foreach (var a in lstAbonnes)
+                    // si l'élément n'est pas présent dans la liste des aides en cours alors on l'ajoute dans le résultat
+                    if (!lstAideEnCours.Contains(a))
                     result.Add(this.GetSubscriberInfos(context, new PersonViewItem() { Id = a.Personne, Login = a.Pseudo, Genre = a.Genre }, styleId));
             }
             return result;
@@ -198,11 +212,11 @@ namespace ConseilREP
                                   && c.StyleId == styleId 
                                   && c.TypeId == (int)DemandeStatus.AttenteConseiller 
                                   && p.StatutHistoriques.Where(o => o.StyleId == styleId && o.TypeId == (int)PersonneStatus.EnAttente).Count() > 0
-                                  select new { Personne = p.Id, Pseudo = p.Pseudo, Genre = p.Genre }).Distinct().ToList();
+                                  select new { Personne = p.Id, Pseudo = p.Pseudo, Genre = p.Genre, Conseil = c.Id }).Distinct().ToList();
 
                 result = new List<PersonViewItem>();
                 foreach (var a in lstAbonnes)
-                    result.Add(this.GetSubscriberInfos(context, new PersonViewItem() { Id = a.Personne, Login = a.Pseudo, Genre = a.Genre }, styleId));
+                    result.Add(this.GetSubscriberInfos(context, new PersonViewItem() { Id = a.Personne, Login = a.Pseudo, Genre = a.Genre, ConseilId = a.Conseil }, styleId));
             }
             return result;
         }

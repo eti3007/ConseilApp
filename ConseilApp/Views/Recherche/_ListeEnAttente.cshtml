@@ -17,7 +17,7 @@
         <tbody>
             @foreach (var i in Model.premiereListe.apteConseil)
             {
-                <tr class="row-Modal habillage" data-identifier="@i.id" data-pseudo="@i.pseudo">
+                <tr class="row-Modal habillage" data-identifier="@i.id" data-pseudo="@i.pseudo" data-type="d1">
                     <!-- Conseillers qui peuvent aider -->
                     @*<td>@Html.LinkButtonForModal("recherche", i.pseudo, false)</td>*@
                     <td>@i.pseudo</td>
@@ -45,7 +45,7 @@ else if (Model.premiereListe.attenteConseil != null)
         <tbody>
             @foreach (var i in Model.premiereListe.attenteConseil)
             {
-                <tr class="row-Modal vetement" data-identifier="@i.id" data-pseudo="@i.pseudo">
+                <tr class="row-Modal vetement" data-identifier="@i.id" data-pseudo="@i.pseudo" data-type="p1">
                     <!-- Abonnés en attente de conseil -->
                     <td>@Html.LinkButtonForModal("recherche", i.pseudo, false)</td>
                     <td>@i.nbPhotoVetement</td>
