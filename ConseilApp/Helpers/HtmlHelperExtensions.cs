@@ -235,5 +235,44 @@ namespace ConseilApp.Helpers
 
             return new MvcHtmlString(divGlobal.ToString());
         }
+
+        public static MvcHtmlString NotifItem(this HtmlHelper htmlHelper, List<NotificationViewModel> list) {
+
+            var table = new TagBuilder("table");
+            var tr = new TagBuilder("tr");
+            var td = new TagBuilder("td");
+            var span = new TagBuilder("span");
+            var p = new TagBuilder("p");
+
+
+            table.AddCssClass("table-striped");
+            table.AddCssClass("table-bordered");
+
+            foreach (var notif in list)
+            {
+                // création de la ligne
+
+                // création de la cellule
+                td.Attributes.Add("align", "center");
+
+                // préparation du message de la notification
+
+                // préparation de la date de création de la notification
+
+                // remplissage de la cellule
+
+                // remplissage de la ligne
+
+                // ajout de la ligne dans le tableau
+
+                // réinitialise la ligne et la cellule :
+                tr = new TagBuilder("tr");
+                td = new TagBuilder("td");
+                span = new TagBuilder("span");
+                p = new TagBuilder("p");
+            }
+
+            return new MvcHtmlString(table.ToString());
+        }
     }
 }

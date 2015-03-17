@@ -138,10 +138,8 @@ namespace ConseilApp.Controllers
 
             if (vetementId > 0)
                 UrlListe = this._PhotoService.RecuperePhotosPourPersonneStyleVetement(personneId, styleId, vetementId).Select(p => p.Url).ToList();
-                //UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyleVetement(personneId, styleId, vetementId));
             else
                 UrlListe = this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Vetement, styleId).Select(p => p.Url).ToList();
-                //UrlListe = this._PhotoBuilder.UrlPhotoListe(this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Vetement, styleId));
 
             if (UrlListe.Count > 0)
             {

@@ -209,6 +209,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListeController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\RechercheController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CustomAccount\AccountViewModel.cs" />
     <Compile Include="Classes\FilesStatus.cs" />
+    <Compile Include="Models\Notification\NotificationViewModel.cs" />
     <Compile Include="Models\Photo\PhotoViewModel.cs" />
     <Compile Include="Models\Recherche\RechercheModel.cs" />
     <Compile Include="Models\Recherche\RechercheObjects.cs" />
@@ -400,6 +402,7 @@
     <Content Include="Views\Recherche\Demandes.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_ModalView.cshtml" />
+    <Content Include="Views\Notification\_AfficheNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
