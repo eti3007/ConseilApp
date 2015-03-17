@@ -56,6 +56,9 @@
                 styleId: id
             });
 
+            // charge les notifications pour le style choisi :
+            ChargerNotification();
+
             // Attente :
             var url = '@Url.Action("RecherchePartial", "Recherche")';
             $.ajax({ type: "GET", url: url, data: { style: id, partialName: '_ListeEnAttente', pageName: page } })

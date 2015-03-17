@@ -7,6 +7,12 @@
     <h1>@ViewBag.Title</h1>
     @Html.Partial("_ListStylePartial", new { ViewBag.Page })
 </hgroup>
+
+@section sidebar {
+    <div id="Notifications" class="content-wrapper">
+    </div>
+}
+
 <div class="accordion" id="accDemandes">
     <div class="accordion-group">
         <div class="accordion-heading">
@@ -46,12 +52,13 @@
     <script type="text/javascript">
     $(function () {
         $('#ModalContainer').html('@Html.ModalShow("recherche", "Visualiser les photos habillées", "test", true)');
-        
+
         var div = $("div.accordion")[0];
         $.data(div, "urlRecherche", {
             urlHabillage: '@Url.Action("AffichePhotosHabillage", "Upload")',
             urlVetement: '@Url.Action("AffichePhotosVetement", "Upload")',
             urlAction: '@Url.Action("ActionAbonne","Recherche")',
+            urlNotification: '@Url.Action("AfficheNotificationAbonne","Notification")',
             pageName: '@ViewBag.Page'
         });
         $.data(div, "styleEnCours", {

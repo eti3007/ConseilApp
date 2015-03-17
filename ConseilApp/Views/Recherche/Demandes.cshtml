@@ -9,6 +9,11 @@
     @Html.Partial("_ListStylePartial", new { ViewBag.Page })
 </hgroup>
 
+@section sidebar {
+    <div id="Notifications" class="content-wrapper">
+    </div>
+}
+
 <div class="accordion" id="accDemandes">
     <div class="accordion-group">
         <div class="accordion-heading">
@@ -46,21 +51,22 @@
     @Scripts.Render("~/bundles/CarouselJs")
 
     <script type="text/javascript">
-        $(function () {
-            $('#ModalContainer').html('@Html.ModalShow("recherche", "Visualiser les photos habillées", "test", true)');
-
-            var div = $("div.accordion")[0];
-            $.data(div, "urlRecherche", {
-                urlHabillage: '@Url.Action("AffichePhotosHabillage", "Upload")',
-                urlVetement: '@Url.Action("AffichePhotosVetement", "Upload")',
-                urlAction: '@Url.Action("ActionAbonne","Recherche")',
-                pageName: '@ViewBag.Page'
-            });
-            $.data(div, "styleEnCours", {
-                styleId: '@ViewBag.RechercheStyleEncours'
-            });
+    $(function () {
+        $('#ModalContainer').html('@Html.ModalShow("recherche", "Visualiser les photos habillées", "Photo habillées", true)');
+ 
+        var div = $("div.accordion")[0];
+        $.data(div, "urlRecherche", {
+            urlHabillage: '@Url.Action("AffichePhotosHabillage", "Upload")',
+            urlVetement: '@Url.Action("AffichePhotosVetement", "Upload")',
+            urlAction: '@Url.Action("ActionAbonne","Recherche")',
+            urlNotification: '@Url.Action("AfficheNotificationAbonne","Notification")',
+            pageName: '@ViewBag.Page'
         });
-    </script>
+        $.data(div, "styleEnCours", {
+            styleId: '@ViewBag.RechercheStyleEncours'
+        });
+    });
+</script>
     
     @Scripts.Render("~/bundles/RechercheJs")
 }

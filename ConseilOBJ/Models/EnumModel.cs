@@ -33,20 +33,21 @@
         Buste,
         Jambe,
         Pied,
-        Accessoire
+        Accessoire,
+        Main
     }
     public enum CompteurType
     {
-        Abonne = 21,
+        Abonne = 22,
         Conseiller
     }
     public enum NotifType
     {
-        DemandCreation = 1,
+        DemandCreation = 24,
+        DemandAccept,
+        DemandReject,
         PropositionAccept,
         PropositionReject,
-        PropositionCreation,
-        DemandAccept,
-        DemandReject
+        PropositionCreation
     }
 }

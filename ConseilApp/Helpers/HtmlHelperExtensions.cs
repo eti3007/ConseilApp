@@ -236,43 +236,58 @@ namespace ConseilApp.Helpers
             return new MvcHtmlString(divGlobal.ToString());
         }
 
-        public static MvcHtmlString NotifItem(this HtmlHelper htmlHelper, List<NotificationViewModel> list) {
-
+        public static MvcHtmlString NotifItem(this HtmlHelper htmlHelper, NotificationViewModel notif)
+        {
+            var div = new TagBuilder("div");
             var table = new TagBuilder("table");
             var tr = new TagBuilder("tr");
             var td = new TagBuilder("td");
             var span = new TagBuilder("span");
             var p = new TagBuilder("p");
 
-
             table.AddCssClass("table-striped");
             table.AddCssClass("table-bordered");
 
-            foreach (var notif in list)
+            // initialisation de la ligne
+            // récupère la couleur selon le type de notification : 
+            switch (notif.TypeNotif)
             {
-                // création de la ligne
-
-                // création de la cellule
-                td.Attributes.Add("align", "center");
-
-                // préparation du message de la notification
-
-                // préparation de la date de création de la notification
-
-                // remplissage de la cellule
-
-                // remplissage de la ligne
-
-                // ajout de la ligne dans le tableau
-
-                // réinitialise la ligne et la cellule :
-                tr = new TagBuilder("tr");
-                td = new TagBuilder("td");
-                span = new TagBuilder("span");
-                p = new TagBuilder("p");
+                // Demandé
+                case 24:
+                case 29:
+                    div.Attributes.Add("style", "background-color:#FFECD1");
+                    break;
+                // Accepté
+                case 25:
+                case 27:
+                    div.Attributes.Add("style", "background-color:#C5E3C5");
+                    break;
+                // Rejeté
+                case 26:
+                case 28:
+                    div.Attributes.Add("style", "background-color:#F2BBB8");
+                    break;
             }
 
-            return new MvcHtmlString(table.ToString());
+            // préparation du message de la notification
+            span.AddCssClass("text-info");
+            span.InnerHtml = notif.Message;
+
+            // préparation de la date de création de la notification
+            p.AddCssClass("text-left");
+            p.InnerHtml = notif.DateNotif;
+
+            // remplissage de la cellule
+            td.InnerHtml = p.ToString() + span.ToString();
+            div.InnerHtml = p.ToString() + span.ToString();
+
+            // remplissage de la ligne
+            tr.InnerHtml = td.ToString();
+
+            // ajout de la ligne dans le tableau
+            table.InnerHtml = table.InnerHtml + tr.ToString();
+
+            return new MvcHtmlString(div.ToString());
         }
     }
 }

@@ -6,5 +6,6 @@ namespace ConseilApp.Models
     {
         public string DateNotif { get; set; }
         public string Message { get; set; }
+        public int TypeNotif { get; set; }
     }
 }

@@ -18,16 +18,16 @@ namespace ConseilApp.Controllers
         }
 
         [Authorize]
-        public PartialViewResult AfficheNotificationAbonne(string style, int personne)
+        public PartialViewResult AfficheNotificationAbonne(string style)
         {
-            if (!string.IsNullOrEmpty(style) && personne > 0) {
+            if (!string.IsNullOrEmpty(style)) {
                 // récupère la liste des notifications
-                var lstNotification = this._NotificationService.RecupereListeNotification(Convert.ToInt32(style), personne);
+                var lstNotification = this._NotificationService.RecupereListeNotification(Convert.ToInt32(style), base.PersonneId);
 
                 List<NotificationViewModel> viewModel = new List<NotificationViewModel>();
 
                 // création du model pour la vue partielle
-                lstNotification.ForEach(c => viewModel.Add(new NotificationViewModel() { DateNotif = c.DateCreation.ToShortDateString(), Message = c.Message }));
+                lstNotification.ForEach(c => viewModel.Add(new NotificationViewModel() { DateNotif = c.DateCreation.ToShortDateString(), Message = c.Message, TypeNotif = c.TypeId }));
                 lstNotification = null;
 
                 return PartialView("_AfficheNotification", viewModel);

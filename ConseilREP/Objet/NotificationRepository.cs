@@ -56,7 +56,6 @@ namespace ConseilREP
                                      join c in context.Conseils on n.ConseilId equals c.Id
                                      where c.StyleId == styleId && n.PersonneId == personneId
                                      orderby n.DateCreation descending
-                                     //select new { Id = n.Id, Message = n.Message, DateNotif = n.DateCreation, ConseilId = n.ConseilId }
                                      select n
                                     ).ToList();
 

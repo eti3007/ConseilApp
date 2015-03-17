@@ -4,5 +4,12 @@
 @model List<NotificationViewModel>
 @if (Model.Count > 0)
 {
-    
+    <ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
+        @foreach (NotificationViewModel s in Model)
+        {
+            <li>
+                @Html.NotifItem(@s)
+            </li>
+        }
+    </ul>
 }
