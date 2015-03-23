@@ -250,6 +250,19 @@ namespace ConseilREP
         }
 
         /// <summary>
+        /// Retourne la liste des photos d'un habillage
+        /// </summary>
+        /// <param name="habillageId">identifiant de l'habillage</param>
+        /// <returns>liste de photo</returns>
+        public List<Photo> GetPicsByHabillage(int habillageId)
+        {
+            using (var context = new ConseilEntitiesBis())
+            {
+                return context.Photos.Include(p => p.Habillages).AsQueryable().Where(p => p.Habillages.Any(h => h.Id.Equals(habillageId))).ToList();
+            }
+        }
+
+        /// <summary>
         /// Permet de supprimer la photo d'un vêtement d'une personne pour un style
         /// </summary>
         public bool DeletePicByPersonStyleVetement(int personneId, int styleId, int vetementId, string photoNom)

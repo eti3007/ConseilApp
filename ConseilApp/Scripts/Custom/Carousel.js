@@ -27,9 +27,11 @@ function UpdateWidthForInLinePictures(minWidth, selector) {
 }
 
 // fonction qui retire toutes les lignes qui contiennent le lien Supprimer :
-function RemoveDeleteLink()
+function RemoveDeleteLink(selector)
 {
-    $('#mycarousel tr td').each(function (index,value) {
+    var divMaitre = '';
+    if (selector != undefined) { if (selector != '') { divMaitre = selector + ' '; } }
+    $(divMaitre + '#mycarousel tr td').each(function (index,value) {
 
         var attr = $(this).attr('onclick');
 

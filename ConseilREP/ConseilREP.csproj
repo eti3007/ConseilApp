@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IConseilRepository.cs" />
+    <Compile Include="Interfaces\IHabillageRepository.cs" />
     <Compile Include="Interfaces\INotificationRepository.cs" />
     <Compile Include="Interfaces\IPersonneRepository.cs" />
     <Compile Include="Interfaces\IPhotoRepository.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Interfaces\ITypeVetementRepository.cs" />
     <Compile Include="Interfaces\IVetementRepository.cs" />
     <Compile Include="Objet\ConseilRepository.cs" />
+    <Compile Include="Objet\HabillageRepository.cs" />
     <Compile Include="Objet\NotificationRepository.cs" />
     <Compile Include="Objet\PersonneRepository.cs" />
     <Compile Include="Objet\PhotoRepository.cs" />

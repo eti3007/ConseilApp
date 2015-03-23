@@ -80,13 +80,13 @@ function GestionModal($element, datas, btnText, pseudo, typeTbl, id, conseil) {
         var footerContent = $('#recherche div.modal-footer').html();
         $('#recherche div.modal-footer').html("<input class='btn btn-success' style='float:left' type='button' value='" + btnText +
             "' onclick='AppelActionAide(\"" + typeTbl + "\", " + id + ", " + conseil + ")'>" + footerContent);
-        CarouselHorizontalSetting();
+        CarouselHorizontalSetting('#recherche');
 
         // calcul automatique du width du carousel
-        UpdateWidthForInLinePictures(488);
+        UpdateWidthForInLinePictures(488, '#recherche');
 
         // enlève les évènements de suppression sur les images
-        RemoveDeleteLink();
+        RemoveDeleteLink('#recherche');
 
         // affiche la popup modal
         $('#recherche').modal('show');

@@ -27,14 +27,6 @@ function AfficheNotification(datas) {
 
         $('#Notifications').html(datas);
 
-        //CarouselHorizontalSetting();
-
-        // calcul automatique du width du carousel
-        //UpdateWidthForInLinePictures(488);
-
-        // enlève les évènements de suppression sur les images
-        //RemoveDeleteLink();
-
     }
     else { $('#Notifications').html("Aucune notification trouvée !"); }
 }

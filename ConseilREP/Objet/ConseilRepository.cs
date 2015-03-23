@@ -125,6 +125,24 @@ namespace ConseilREP
         }
 
         /// <summary>
+        /// Retourne la liste des conseils d'un demandeur ou d'un conseiller.
+        /// </summary>
+        /// <param name="statuses">les statuts selon si c'est un demandeur ou un conseiller</param>
+        /// <param name="style">style sélectionné</param>
+        /// <param name="personneId">demandeur ou conseiller</param>
+        /// <param name="demandeur">valeur booléenne pour savoir si c'est un demandeur ou un conseiller</param>
+        /// <returns>liste des conseils</returns>
+        public List<Conseil> GetByStatusesStylePerson(List<int> statuses, int style, int personneId, bool demandeur = true)
+        {
+            using (var context = new ConseilEntitiesBis()) {
+                if (demandeur)
+                    return context.Conseils.AsQueryable().Where(c => c.StyleId.Equals(style) && c.DemandeurId.Equals(personneId) && statuses.Contains(c.TypeId)).ToList();
+                else
+                    return context.Conseils.AsQueryable().Where(c => c.StyleId.Equals(style) && c.ConseillerId.Equals(personneId) && statuses.Contains(c.TypeId)).ToList();
+            }
+        }
+
+        /// <summary>
         /// Vérifie si une conseil n'eciste pas déjà avec les identifiants suivants
         /// </summary>
         /// <param name="styleId">identifiant du style</param>
