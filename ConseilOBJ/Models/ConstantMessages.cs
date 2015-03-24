@@ -17,5 +17,7 @@ namespace ConseilOBJ
         public const string MSG_ENVOI_PROPOSITION_CONSEILLER = "Votre proposition d'aide a été envoyé à {0}";
         public const string MSG_ACCEPTE_DEMANDE_DEMANDEUR = "{0} a accepté de vous aider pour le style {1}";
         public const string MSG_REFUSE_DEMANDE_DEMANDEUR = "{0} a refusé de vous aider pour le style {1}";
+
+        public const string MSG_CONSEIL_TERMINE = "{0} vous invite à consulter ses propositions d'habillages";
     }
 }

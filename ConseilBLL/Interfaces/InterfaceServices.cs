@@ -53,6 +53,7 @@ namespace ConseilBLL.Interfaces
         List<Photo> RecuperePhotosPourPersonneStyle(int personneId, PhotoType typePhoto, int styleId);
         bool SupprimePhotosParPersonneStyleVetement(int personneId, int styleId, int vetementId, string photoNom);
         bool SupprimePhotosHabillageParPersonneStyle(int personneId, int styleId, string photoNom);
+        List<Photo> RecuperePhotosPourHabillage(int habillageId);
     }
 
     public interface IVetementService
@@ -64,10 +65,20 @@ namespace ConseilBLL.Interfaces
     public interface IConseilService
     {
         void AppliqueActionAbonne(int? conseilId, int? demandeurId, int? conseillerId, int styleId, bool pageDemande);
+        List<Conseil> RecupereConseilsDemandeurParStatutStyle(List<int> statuses, int style, int personneId);
+        List<Conseil> RecupereConseilsConseillerParStatutStyle(List<int> statuses, int style, int personneId);
+        void TerminerConseil(int conseilId);
     }
 
     public interface INotificationService
     {
         List<Notification> RecupereListeNotification(int styleId, int personneId);
+        bool PersonneEnvoiMessage(int conseilId, int personneId, string message);
+    }
+
+    public interface IHabillageService
+    {
+        List<Habillage> RecupereHabillagePourConseil(int conseilId);
+        int SauvegardeHabillage(int? habillageId, int conseilId, System.DateTime jour, short? note);
     }
 }

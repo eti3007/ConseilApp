@@ -93,7 +93,6 @@ namespace ConseilREP
                 }
             }
             #endregion
-
             #region NOTIFICATION
             // ajoute une notification si la demande/proposition d'aide a été acceptée ou refusée
             try {
@@ -125,6 +124,26 @@ namespace ConseilREP
         }
 
         /// <summary>
+        /// Vérifie si une conseil n'eciste pas déjà avec les identifiants suivants
+        /// </summary>
+        /// <param name="styleId">identifiant du style</param>
+        /// <param name="conseillerId">identifiant du conseiller</param>
+        /// <param name="demandeurId">identifiant du demandeur</param>
+        /// <param name="statut">identifiant du statut du conseil</param>
+        /// <returns>valeur booléenne</returns>
+        public bool ExistConseilByIds(int styleId, int conseillerId, int demandeurId, int statut)
+        {
+            using (var context = new ConseilEntitiesBis())
+            {
+                return context.Conseils.AsQueryable()
+                        .Any(c => c.StyleId == styleId && 
+                                    c.DemandeurId == demandeurId && 
+                                    c.ConseillerId == conseillerId && 
+                                    c.TypeId == statut);
+            }
+        }
+
+        /// <summary>
         /// Retourne la liste des conseils d'un demandeur ou d'un conseiller.
         /// </summary>
         /// <param name="statuses">les statuts selon si c'est un demandeur ou un conseiller</param>
@@ -143,23 +162,50 @@ namespace ConseilREP
         }
 
         /// <summary>
-        /// Vérifie si une conseil n'eciste pas déjà avec les identifiants suivants
+        /// Cloture un conseil
         /// </summary>
-        /// <param name="styleId">identifiant du style</param>
-        /// <param name="conseillerId">identifiant du conseiller</param>
-        /// <param name="demandeurId">identifiant du demandeur</param>
-        /// <param name="statut">identifiant du statut du conseil</param>
-        /// <returns>valeur booléenne</returns>
-        public bool ExistConseilByIds(int styleId, int conseillerId, int demandeurId, int statut)
-        {
-            using (var context = new ConseilEntitiesBis())
-            {
-                return context.Conseils.AsQueryable()
-                        .Any(c => c.StyleId == styleId && 
-                                    c.DemandeurId == demandeurId && 
-                                    c.ConseillerId == conseillerId && 
-                                    c.TypeId == statut);
+        public void EndConseil(int conseilId) {
+            Conseil conseil = null;
+
+            #region CONSEIL
+            // Change le statut du conseil
+            using (var context = new ConseilEntitiesBis()) {
+                try {
+                    // ajoute la demande dans la table Conseil
+                    conseil = context.Conseils.AsQueryable().FirstOrDefault(x => x.Id.Equals(conseilId));
+
+                    if (conseil == null) return;
+
+                    // applique le statut terminé
+                    conseil.TypeId = (int)DemandeStatus.Termine;
+
+                    context.Entry(conseil).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
+                catch (DbEntityValidationException ex) {
+                    throw new CustomException().CustomValidationExceptionReturn(ex);
+                }
+                catch {
+                    return;
+                }
             }
+            #endregion
+            #region NOTIFICATION
+            // envoi la notification au demandeur
+            try
+            {
+                if (conseil != null) {
+                    using (var notification = new NotificationRepository()) {
+                        notification.Notify(conseil.StyleId, conseil.ConseillerId, conseil.DemandeurId, conseil.Id, NotifType.Termine);
+                    }
+                }
+            }
+            catch
+            {
+                // rien à faire...
+            }
+            #endregion
+
         }
 
         public void Dispose()

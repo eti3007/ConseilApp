@@ -48,6 +48,7 @@
         DemandReject,
         PropositionAccept,
         PropositionReject,
-        PropositionCreation
+        PropositionCreation,
+        Termine
     }
 }

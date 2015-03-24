@@ -8,8 +8,9 @@ namespace ConseilREP.Interfaces
     {
         bool AddDressingDemand(int styleId, int conseillerId, int demandeurId, int statut, int typeNotification);
         bool UpdDressingDemand(int conseilId, int styleId, int conseillerId, int demandeurId, int statut, int typeNotification);
+        bool ExistConseilByIds(int styleId, int conseillerId, int demandeurId, int statut);
         Conseil GetById(int conseilId);
         List<Conseil> GetByStatusesStylePerson(List<int> statuses, int style, int personneId, bool demandeur = true);
-        bool ExistConseilByIds(int styleId, int conseillerId, int demandeurId, int statut);
+        void EndConseil(int conseilId);
     }
 }

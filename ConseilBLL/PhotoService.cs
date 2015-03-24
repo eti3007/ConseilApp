@@ -57,5 +57,10 @@ namespace ConseilBLL
         {
             return repository.DeleteWearingPicByPersonStyle(personneId, styleId, photoNom);
         }
+
+        public List<Photo> RecuperePhotosPourHabillage(int habillageId)
+        {
+            return this.repository.GetPicsByHabillage(habillageId);
+        }
     }
 }

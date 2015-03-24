@@ -10,5 +10,6 @@ namespace ConseilREP.Interfaces
     public interface IHabillageRepository
     {
         List<Habillage> GetByConseilId(int id);
+        int SaveHabillage(int? habillageId, int conseilId, DateTime jour, short? note);
     }
 }

@@ -66,5 +66,29 @@ namespace ConseilBLL
                 _ConseilRepository.AddDressingDemand(styleId, conseillerId.Value, demandeurId.Value, (int)stautDemande, (int)typeNotification);
             }
         }
+
+        /// <summary>
+        /// Récupère la liste des conseils pour un demandeur
+        /// </summary>
+        public List<Conseil> RecupereConseilsDemandeurParStatutStyle(List<int> statuses, int style, int personneId)
+        {
+            return this._ConseilRepository.GetByStatusesStylePerson(statuses, style, personneId);
+        }
+
+        /// <summary>
+        /// Récupère la liste des conseils pour un conseiller
+        /// </summary>
+        public List<Conseil> RecupereConseilsConseillerParStatutStyle(List<int> statuses, int style, int personneId)
+        {
+            return this._ConseilRepository.GetByStatusesStylePerson(statuses, style, personneId, false);
+        }
+
+        /// <summary>
+        /// Permet de terminer un conseil après que le conseiller ait créé au moins un habillage !
+        /// </summary>
+        public void TerminerConseil(int conseilId)
+        {
+            this._ConseilRepository.EndConseil(conseilId);
+        }
     }
 }

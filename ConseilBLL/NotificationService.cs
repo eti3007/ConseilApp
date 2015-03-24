@@ -18,5 +18,10 @@ namespace ConseilBLL
         {
             return this._NotificationRepository.GetNotificationsByPersonne(styleId, personneId);
         }
+
+        public bool PersonneEnvoiMessage(int conseilId, int personneId, string message)
+        {
+            return this._NotificationRepository.SendCustomerMessage(conseilId, personneId, message);
+        }
     }
 }

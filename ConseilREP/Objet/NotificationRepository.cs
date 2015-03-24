@@ -14,7 +14,9 @@ namespace ConseilREP
 {
     public class NotificationRepository : INotificationRepository, IDisposable
     {
-
+        /// <summary>
+        /// Ajoute une ou plusieurs notifications pour un conseil selon l'étape d'une demande ou d'une proposition
+        /// </summary>
         public bool Notify(int styleId, int consultantId, int personneId, int conseilId, NotifType type)
         {
             bool result = false;
@@ -40,6 +42,9 @@ namespace ConseilREP
                 case NotifType.DemandReject: // {0} a refusé de vous aider pour le style {1}
                     result = this.SendOneNotification(styleId, personneId, conseilId, ConstantMessages.MSG_REFUSE_DEMANDE_DEMANDEUR);
                     break;
+                case NotifType.Termine: // {0} vous invite à consulter ses propositions d'habillages
+                    result = this.SendOneNotification(styleId, personneId, conseilId, ConstantMessages.MSG_CONSEIL_TERMINE);
+                    break;
             };
             return result;
         }
@@ -63,6 +68,38 @@ namespace ConseilREP
             return result;
         }
 
+        /// <summary>
+        /// Ajoute le message de la personne (demandeur ou conseiller) au conseil en cours
+        /// </summary>
+        public bool SendCustomerMessage(int conseilId, int personneId, string message)
+        {
+            bool result = false;
+            using (var context = new ConseilEntitiesBis())
+            {
+                try
+                {
+                    Notification notifConsultant = new Notification()
+                    {
+                        DateCreation = DateTime.Now,
+                        ConseilId = conseilId,
+                        PersonneId = personneId,
+                        TypeId = (int)MessageType.Notification,
+                        Message = message
+                    };
+                    this.AddNotification(context, ref notifConsultant);
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    throw ex;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            return result;
+        }
 
         private bool SendOneNotification(int styleId, int personneId, int conseilId, string message)
         {
