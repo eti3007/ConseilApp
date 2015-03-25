@@ -10,7 +10,7 @@ using ConseilDAL;
 using ConseilDAL.Exceptions;
 using ConseilREP.Interfaces;
 
-namespace ConseilREP.Objet
+namespace ConseilREP
 {
     public class HabillageRepository : IHabillageRepository, IDisposable
     {

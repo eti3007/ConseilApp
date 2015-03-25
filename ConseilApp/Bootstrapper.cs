@@ -40,6 +40,7 @@ namespace ConseilApp
         container.RegisterType<IVetementService, VetementService>();
         container.RegisterType<IConseilService, ConseilService>();
         container.RegisterType<INotificationService, NotificationService>();
+        container.RegisterType<IHabillageService, HabillageService>();
  
         // Repository :
         container.RegisterType<IConseilRepository,ConseilRepository>();
@@ -51,6 +52,7 @@ namespace ConseilApp
         container.RegisterType<ITypeVetementRepository, TypeVetementRepository>();
         container.RegisterType<IStatutHistoriqueRepository, StatutHistoriqueRepository>();
         container.RegisterType<IVetementRepository, VetementRepository>();
+        container.RegisterType<IHabillageRepository, HabillageRepository>();
 
         // Builder :
         container.RegisterType<IPersonneBuilder, PersonneBuilder>();

@@ -207,6 +207,7 @@
     <Compile Include="Classes\FileUpload.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HabillageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListeController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
@@ -409,6 +410,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\Photo\Habillage\" />
     <Folder Include="Images\Photo\Vetement\" />
+    <Folder Include="Views\Habillage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
