@@ -65,8 +65,8 @@ namespace ConseilBLL.Interfaces
     public interface IConseilService
     {
         void AppliqueActionAbonne(int? conseilId, int? demandeurId, int? conseillerId, int styleId, bool pageDemande);
-        List<Conseil> RecupereConseilsDemandeurParStatutStyle(List<int> statuses, int style, int personneId);
-        List<Conseil> RecupereConseilsConseillerParStatutStyle(List<int> statuses, int style, int personneId);
+        Dictionary<int, string[]> RecupereConseilsDemandeurParStatutStyle(List<int> statuses, int style, int personneId);
+        Dictionary<int, string[]> RecupereConseilsConseillerParStatutStyle(List<int> statuses, int style, int personneId);
         void TerminerConseil(int conseilId);
     }
 

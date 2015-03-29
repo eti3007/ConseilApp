@@ -151,7 +151,7 @@ namespace ConseilREP
         /// <param name="personneId">demandeur ou conseiller</param>
         /// <param name="demandeur">valeur booléenne pour savoir si c'est un demandeur ou un conseiller</param>
         /// <returns>liste des conseils</returns>
-        public List<Conseil> GetByStatusesStylePerson(List<int> statuses, int style, int personneId, bool demandeur = true)
+        public List<Conseil> GetByStatusesStylePersonOld(List<int> statuses, int style, int personneId, bool demandeur = true)
         {
             using (var context = new ConseilEntitiesBis()) {
                 if (demandeur)
@@ -159,6 +159,45 @@ namespace ConseilREP
                 else
                     return context.Conseils.AsQueryable().Where(c => c.StyleId.Equals(style) && c.ConseillerId.Equals(personneId) && statuses.Contains(c.TypeId)).ToList();
             }
+        }
+
+        /// <summary>
+        /// Retourne la liste des conseils d'un demandeur ou d'un conseiller.
+        /// </summary>
+        /// <param name="statuses">les statuts selon si c'est un demandeur ou un conseiller</param>
+        /// <param name="style">style sélectionné</param>
+        /// <param name="personneId">demandeur ou conseiller</param>
+        /// <param name="demandeur">valeur booléenne pour savoir si c'est un demandeur ou un conseiller</param>
+        /// <returns></returns>
+        public Dictionary<int, string[]> GetByStatusesStylePerson(List<int> statuses, int style, int personneId, bool demandeur = true)
+        {
+            Dictionary<int, string[]> result = new Dictionary<int, string[]>();
+
+            using (var context = new ConseilEntitiesBis())
+            {
+                if (demandeur) {
+                    var obj = (from c in context.Conseils.Include("Habillages")
+                              join p in context.Personnes on c.ConseillerId equals p.Id 
+                              where c.StyleId.Equals(style) && c.DemandeurId.Equals(personneId) && statuses.Contains(c.TypeId)
+                               select new { c.Id, c.ConseillerId, p.Pseudo, c.DateCreation, c.Habillages.Count }).ToList();
+
+                    if (obj.Count() > 0) {
+                        obj.ForEach(o => result.Add(o.Id, new string[] { o.ConseillerId.ToString(), o.Pseudo, o.DateCreation.ToShortDateString(), o.Count.ToString() }));
+                    }
+                }
+                else {
+                    var obj = (from c in context.Conseils.Include("Habillages")
+                               join p in context.Personnes on c.DemandeurId equals p.Id
+                               where c.StyleId.Equals(style) && c.ConseillerId.Equals(personneId) && statuses.Contains(c.TypeId)
+                               select new { c.Id, c.DemandeurId, p.Pseudo, c.DateCreation, c.Habillages.Count }).ToList();
+
+                    if (obj.Count() > 0) {
+                        obj.ForEach(o => result.Add(o.Id, new string[] { o.DemandeurId.ToString(), o.Pseudo, o.DateCreation.ToShortDateString(), o.Count.ToString() }));
+                    }
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

@@ -68,17 +68,19 @@ namespace ConseilBLL
         }
 
         /// <summary>
-        /// Récupère la liste des conseils pour un demandeur
+        /// Récupère la liste des conseils pour un demandeur :
+        /// Conseil Id | Conseiller Id | Pseudo | Date création | Nb habillage du conseil
         /// </summary>
-        public List<Conseil> RecupereConseilsDemandeurParStatutStyle(List<int> statuses, int style, int personneId)
+        public Dictionary<int, string[]> RecupereConseilsDemandeurParStatutStyle(List<int> statuses, int style, int personneId)
         {
             return this._ConseilRepository.GetByStatusesStylePerson(statuses, style, personneId);
         }
 
         /// <summary>
-        /// Récupère la liste des conseils pour un conseiller
+        /// Récupère la liste des conseils pour un conseiller :
+        /// Conseil Id | Demandeur Id | Pseudo | Date création | Nb habillage du conseil
         /// </summary>
-        public List<Conseil> RecupereConseilsConseillerParStatutStyle(List<int> statuses, int style, int personneId)
+        public Dictionary<int, string[]> RecupereConseilsConseillerParStatutStyle(List<int> statuses, int style, int personneId)
         {
             return this._ConseilRepository.GetByStatusesStylePerson(statuses, style, personneId, false);
         }

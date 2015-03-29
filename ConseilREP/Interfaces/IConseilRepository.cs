@@ -10,7 +10,8 @@ namespace ConseilREP.Interfaces
         bool UpdDressingDemand(int conseilId, int styleId, int conseillerId, int demandeurId, int statut, int typeNotification);
         bool ExistConseilByIds(int styleId, int conseillerId, int demandeurId, int statut);
         Conseil GetById(int conseilId);
-        List<Conseil> GetByStatusesStylePerson(List<int> statuses, int style, int personneId, bool demandeur = true);
+        List<Conseil> GetByStatusesStylePersonOld(List<int> statuses, int style, int personneId, bool demandeur = true);
+        Dictionary<int, string[]> GetByStatusesStylePerson(List<int> statuses, int style, int personneId, bool demandeur = true);
         void EndConseil(int conseilId);
     }
 }

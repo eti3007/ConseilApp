@@ -18,8 +18,10 @@ namespace ConseilApp.Controllers
         }
 
         [Authorize]
-        public PartialViewResult ListeConseils()
+        public PartialViewResult ListeConseils(int style, int personne, bool estDemandeur)
         {
+            
+
             return null;
         }
 

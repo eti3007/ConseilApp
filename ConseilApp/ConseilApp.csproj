@@ -198,11 +198,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Builders\DropDownListBuilder.cs" />
+    <Compile Include="Builders\Interfaces\IHabillageBuilder.cs" />
     <Compile Include="Builders\Interfaces\IMenuBuilder.cs" />
     <Compile Include="Builders\Interfaces\IRechercheBuilder.cs" />
     <Compile Include="Builders\MenuBuilder.cs" />
     <Compile Include="Builders\PersonneBuilder.cs" />
     <Compile Include="Builders\Interfaces\IPersonneBuilder.cs" />
+    <Compile Include="Builders\HabillageBuilder.cs" />
     <Compile Include="Builders\RechercheBuilder.cs" />
     <Compile Include="Classes\FileUpload.cs" />
     <Compile Include="Controllers\AccountController.cs" />
