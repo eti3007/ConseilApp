@@ -224,6 +224,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CustomAccount\AccountViewModel.cs" />
     <Compile Include="Classes\FilesStatus.cs" />
+    <Compile Include="Models\Habillage\ConseilItem.cs" />
     <Compile Include="Models\Notification\NotificationViewModel.cs" />
     <Compile Include="Models\Photo\PhotoViewModel.cs" />
     <Compile Include="Models\Recherche\RechercheModel.cs" />
