@@ -28,7 +28,8 @@ namespace ConseilApp.Builders
         }
 
         // [private] retourne liste des status de conseil selon si c'est un demandeur ou un conseiller
-        private List<int> RecupereListeStatutConseil(bool estDemandeur = true) {
+        private List<int> RecupereListeStatutConseil(bool estDemandeur = true)
+        {
             List<int> result = new List<int>();
 
             result.Add((int)DemandeStatus.Accepte);
@@ -47,9 +48,11 @@ namespace ConseilApp.Builders
                 this._ConseilService.RecupereConseilsDemandeurParStatutStyle(listStatus, style, personne) :
                 this._ConseilService.RecupereConseilsConseillerParStatutStyle(listStatus, style, personne);
 
-            if (serviceData != null && serviceData.Count > 0) {
+            if (serviceData != null && serviceData.Count > 0)
+            {
                 // Conseil Id | Demandeur Id | Pseudo | Date création | Nb habillage du conseil
-                foreach (var key in serviceData.Keys) {
+                foreach (var key in serviceData.Keys)
+                {
                     result.Add(new ConseilItem(key, Convert.ToInt32(serviceData[key][0]), serviceData[key][1], serviceData[key][2], Convert.ToInt32(serviceData[key][3])));
                 }
             }
@@ -63,7 +66,8 @@ namespace ConseilApp.Builders
             Dictionary<int, string> result = new Dictionary<int, string>();
 
             var listHabillage = this._HabillageService.RecupereHabillagePourConseil(conseil);
-            if (listHabillage != null && listHabillage.Count > 0) {
+            if (listHabillage != null && listHabillage.Count > 0)
+            {
                 // Du plus récent au plus ancien
                 listHabillage.OrderByDescending(h => h.DateCreation).ToList().ForEach(h => result.Add(h.Id, h.DateCreation.ToShortDateString()));
             }
@@ -93,26 +97,22 @@ namespace ConseilApp.Builders
 
         // [public] Valider un habillage
         //int SauvegardeHabillage(int? habillageId, int conseilId, System.DateTime jour, short? note)
-        public int HabillageValide()
+        public int HabillageValide(int conseil, List<int> photoIds)
         {
-            // A - Vérifie que les photos pour les types de vêtement obligatoire soient dans la liste
+            // A - créer l'enregistrement de l'habillage (avec le conseilId)
+            int habillageId = this._HabillageService.SauvegardeHabillage(null, conseil, DateTime.Now, null);
 
-            // B - Upload les photos
+            // B - associe les photos de vêtement à l'habillage créé
+            int nbPhoto = this._HabillageService.SauvegardePhotosHabillage(habillageId, photoIds);
 
-            // C - Si toutes les photos ont été téléchargé alors 
-
-            // C1 - créer l'enregistrement de l'habillage
-
-            // C2 - associe les photos de vêtement à l'habillage créé
-
-            // C3 - associe l'habillage créé au conseil
-            
-            return 0;
+            return nbPhoto;
         }
 
-        // [public] Soumettre une validation de conseil, avec la note
-
-
+        // [public] Soumettre une note au conseil
+        public void ConseilValide(int habillage, int conseil, Int16 note)
+        {
+            this._HabillageService.SauvegardeHabillage(habillage, conseil, DateTime.Now, note);
+        }
 
     }
 }

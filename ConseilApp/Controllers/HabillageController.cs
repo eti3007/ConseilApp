@@ -10,20 +10,27 @@ namespace ConseilApp.Controllers
 {
     public class HabillageController : Controller
     {
-        private IHabillageService _HabillageService;
+        private IHabillageBuilder _HabillageBuilder;
 
-        public HabillageController(IHabillageService HabillageService)
+        public HabillageController(IHabillageBuilder HabillageBuilder)
         {
-            this._HabillageService = HabillageService;
+            this._HabillageBuilder = HabillageBuilder;
         }
 
         [Authorize]
-        public PartialViewResult ListeConseils(int style, int personne, bool estDemandeur)
+        public ActionResult Concevoir(int style, int personne)
         {
-            
-
-            return null;
+            var model = this._HabillageBuilder.RecupereConseil(style, personne, false);
+            return View(model);
         }
+
+        [Authorize]
+        public ActionResult Visualiser(int style, int personne)
+        {
+            var model = this._HabillageBuilder.RecupereConseil(style, personne, true);
+            return View(model);
+        }
+
 
         [Authorize]
         public PartialViewResult ListeHabillage()
@@ -34,6 +41,8 @@ namespace ConseilApp.Controllers
         [Authorize]
         public PartialViewResult ConcevoirHabillage()
         {
+            // A - Vérifie que les photos pour les types de vêtement obligatoire soient dans la liste
+            // A - Récupère l'ID des photos choisies
             return null;
         }
 

@@ -30,5 +30,10 @@ namespace ConseilBLL
         {
             return this._HabillageRepository.SaveHabillage(habillageId, conseilId, jour, note);
         }
+
+        public int SauvegardePhotosHabillage(int habillageId, List<int> picsId)
+        {
+            return this._HabillageRepository.AddPicsToHabillage(habillageId, picsId);
+        }
     }
 }

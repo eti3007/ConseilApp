@@ -51,18 +51,29 @@ namespace ConseilREP
 
         /// <summary>
         /// Liste des notifications (Message) dont le TypeId==7 du plus récent au plus ancien pour un style
+        /// et selon si l'utilisateur est demandeur ou conseiller
         /// </summary>
-        public List<Notification> GetNotificationsByPersonne(int styleId, int personneId)
+        public List<Notification> GetNotificationsByPersonne(int styleId, int personneId, bool isDemandeur)
         {
             List<Notification> result = new List<Notification>();
             using (var context = new ConseilEntitiesBis())
             {
+                if (isDemandeur)
                 result = (from n in context.Notifications
-                                     join c in context.Conseils on n.ConseilId equals c.Id
-                                     where c.StyleId == styleId && n.PersonneId == personneId
-                                     orderby n.DateCreation descending
-                                     select n
-                                    ).ToList();
+                          join c in context.Conseils on n.ConseilId equals c.Id
+                          where c.StyleId == styleId && c.DemandeurId == personneId
+                             && n.PersonneId == personneId
+                          orderby n.DateCreation descending
+                          select n
+                         ).ToList();
+                else
+                result = (from n in context.Notifications
+                          join c in context.Conseils on n.ConseilId equals c.Id
+                          where c.StyleId == styleId && c.ConseillerId == personneId
+                             && n.PersonneId == personneId
+                          orderby n.DateCreation descending
+                          select n
+                         ).ToList();
 
             }
             return result;

@@ -14,9 +14,9 @@ namespace ConseilBLL
             this._NotificationRepository = NotificationRepository;
         }
 
-        public List<Notification> RecupereListeNotification(int styleId, int personneId)
+        public List<Notification> RecupereListeNotification(int styleId, int personneId, bool isDemandeur)
         {
-            return this._NotificationRepository.GetNotificationsByPersonne(styleId, personneId);
+            return this._NotificationRepository.GetNotificationsByPersonne(styleId, personneId, isDemandeur);
         }
 
         public bool PersonneEnvoiMessage(int conseilId, int personneId, string message)

@@ -18,11 +18,11 @@ namespace ConseilApp.Controllers
         }
 
         [Authorize]
-        public PartialViewResult AfficheNotificationAbonne(string style)
+        public PartialViewResult AfficheNotificationAbonne(string style, string page)
         {
             if (!string.IsNullOrEmpty(style)) {
                 // récupère la liste des notifications
-                var lstNotification = this._NotificationService.RecupereListeNotification(Convert.ToInt32(style), base.PersonneId);
+                var lstNotification = this._NotificationService.RecupereListeNotification(Convert.ToInt32(style), base.PersonneId, page.StartsWith("D"));
 
                 List<NotificationViewModel> viewModel = new List<NotificationViewModel>();
 

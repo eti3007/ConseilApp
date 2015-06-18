@@ -72,7 +72,7 @@ namespace ConseilBLL.Interfaces
 
     public interface INotificationService
     {
-        List<Notification> RecupereListeNotification(int styleId, int personneId);
+        List<Notification> RecupereListeNotification(int styleId, int personneId, bool isDemandeur);
         bool PersonneEnvoiMessage(int conseilId, int personneId, string message);
     }
 
@@ -80,5 +80,6 @@ namespace ConseilBLL.Interfaces
     {
         List<Habillage> RecupereHabillagePourConseil(int conseilId);
         int SauvegardeHabillage(int? habillageId, int conseilId, System.DateTime jour, short? note);
+        int SauvegardePhotosHabillage(int habillageId, List<int> picsId);
     }
 }

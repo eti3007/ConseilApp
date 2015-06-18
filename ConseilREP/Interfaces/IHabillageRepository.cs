@@ -11,5 +11,6 @@ namespace ConseilREP.Interfaces
     {
         List<Habillage> GetByConseilId(int id);
         int SaveHabillage(int? habillageId, int conseilId, DateTime jour, short? note);
+        int AddPicsToHabillage(int habillageId, List<int> picsId);
     }
 }
