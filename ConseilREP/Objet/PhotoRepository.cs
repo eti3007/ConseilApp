@@ -204,7 +204,7 @@ namespace ConseilREP
                 try
                 {
                     var nbPhoto = context.Photos.Count(c => (c.PersonneId == personneId));
-                    if (nbPhoto <= 0) return null;
+                    if (nbPhoto <= 0) return new List<Photo>();
 
                     result = context.Photos.Include(c => c.Styles)
                                            .Where(c => (c.PersonneId == personneId) && 
@@ -221,7 +221,7 @@ namespace ConseilREP
         }
 
         /// <summary>
-        /// Récupère les photos de vêtement pour une personne selon un style et type de vètement
+        /// Récupère les photos de vêtement pour une personne selon un style et un vêtement
         /// </summary>
         public List<Photo> GetPicsByPersonVetementStyle(int personneId, int styleId, int vetementId)
         {
@@ -232,12 +232,42 @@ namespace ConseilREP
                 try
                 {
                     var nbPhoto = context.Photos.Count(c => (c.PersonneId == personneId));
-                    if (nbPhoto <= 0) return null;
+                    if (nbPhoto <= 0) return new List<Photo>();
 
                     result = context.Photos.Include(c => c.Styles)
                                            .Where(c => (c.PersonneId == personneId) &&
                                                        (c.TypeId == (int)PhotoType.Vetement) &&
                                                        (c.VetementId == vetementId) && 
+                                                       (c.Styles.Count(v => v.Id == styleId) > 0))
+                                           .ToList();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    throw new CustomException().CustomValidationExceptionReturn(ex);
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Récupère les photos de vêtement pour une personne selon un style et un type de vêtement
+        /// </summary>
+        public List<Photo> GetPicsByPersonTypeVetementStyle(int personneId, int styleId, int TypeParamId)
+        {
+            List<Photo> result = null;
+
+            using (var context = new ConseilEntitiesBis())
+            {
+                try
+                {
+                    var nbPhoto = context.Photos.Count(c => (c.PersonneId == personneId));
+                    if (nbPhoto <= 0) return new List<Photo>();
+
+                    result = context.Photos.Include(c => c.Styles)
+                                           .Include(c => c.Vetement)
+                                           .Where(c => (c.PersonneId == personneId) &&
+                                                       (c.TypeId == (int)PhotoType.Vetement) &&
+                                                       (c.Vetement.TypeId == TypeParamId) && 
                                                        (c.Styles.Count(v => v.Id == styleId) > 0))
                                            .ToList();
                 }
@@ -258,8 +288,26 @@ namespace ConseilREP
         {
             using (var context = new ConseilEntitiesBis())
             {
-                return context.Photos.Include(p => p.Habillages).AsQueryable().Where(p => p.Habillages.Any(h => h.Id.Equals(habillageId))).ToList();
+                return context.Photos
+                    .Include(p => p.Vetement)
+                    .Include(p => p.Habillages)
+                    .AsQueryable()
+                    .Where(p => p.Habillages.Any(h => h.Id.Equals(habillageId)))
+                    .ToList();
             }
+        }
+
+        public bool IsHabillageValide(List<int> photos)
+        {
+            bool result = false;
+            using (var context = new ConseilEntitiesBis())
+            {
+                List<int> lst = new List<int>() { 17, 18, 19 };
+                int nb = context.Photos.Include(p => p.Vetement)
+                                       .Count(p => lst.Contains(p.Vetement.TypeId));
+                result = nb == 3;
+            }
+            return result;
         }
 
         /// <summary>

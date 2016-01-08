@@ -15,7 +15,11 @@ namespace ConseilREP.Interfaces
 
         List<Photo> GetPicsByPersonVetementStyle(int personneId, int styleId, int vetementId);
 
+        List<Photo> GetPicsByPersonTypeVetementStyle(int personneId, int styleId, int TypeParamId);
+
         List<Photo> GetPicsByHabillage(int habillageId);
+
+        bool IsHabillageValide(List<int> photos);
 
         bool DeletePicByPersonStyleVetement(int personneId, int styleId, int vetementId, string photoNom);
 

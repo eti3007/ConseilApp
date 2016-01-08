@@ -43,6 +43,8 @@ namespace ConseilApp
             bundles.Add(new ScriptBundle("~/bundles/RechercheJs").Include(
                 "~/Scripts/Custom/Recherche.js",
                 "~/Scripts/Custom/Notification.js"));
+            bundles.Add(new ScriptBundle("~/bundles/HabillageJs").Include(
+                "~/Scripts/Custom/Habillage.js"));
 
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

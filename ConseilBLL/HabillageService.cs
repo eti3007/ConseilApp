@@ -35,5 +35,10 @@ namespace ConseilBLL
         {
             return this._HabillageRepository.AddPicsToHabillage(habillageId, picsId);
         }
+
+        public bool SupprimeHabillage(int habillageId)
+        {
+            return this._HabillageRepository.DeleteHabillage(habillageId);
+        }
     }
 }

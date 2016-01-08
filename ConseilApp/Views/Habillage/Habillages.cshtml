@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ConseilApp.Models.Habillage.ConseilItemModel>
+@{
+    Layout = "~/Views/Shared/_master.cshtml";
+    bool conceptionHabillage = (bool)ViewBag.IsConception;
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+@section sidebar {
+    @* A réaliser plus tard... *@
+    <div id="Messages" class="content-wrapper"></div>
+}
+
+
+@if (conceptionHabillage) {
+    <h2>Les conseils en cours</h2>
+}
+else {
+    <h2>Les aides en cours</h2>
+}
+
+<div id="divTableau">
+    @{Html.RenderPartial("_AfficheTableau", Model);}
+</div>
+
+<div id="divHabillage">
+    <div id="divConception"></div>
+    <div id="divVisualisation"></div>
+@if (conceptionHabillage) {
+    <div class="ui-button" id="ValideConseil">
+        Terminer et cloturer ce conseil
+    </div>
+}
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            var div = $("#divTableau")[0];
+            $.data(div, "infos", {
+                style: '@ViewBag.Style',
+                personne : '@ViewBag.Personne'
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/HabillageJs")
+}

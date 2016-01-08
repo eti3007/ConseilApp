@@ -133,13 +133,14 @@ namespace ConseilApp.Controllers
             int vetementId = string.IsNullOrEmpty(vetement) ? 0 : Convert.ToInt32(vetement);
             int styleId = string.IsNullOrEmpty(style) ? 0 : Convert.ToInt32(style);
             List<string> UrlListe = new List<string>();
+            IEnumerable<string> lst = null;
 
             int personneId = personne.HasValue ? personne.Value : base.PersonneId;
 
-            if (vetementId > 0)
-                UrlListe = this._PhotoService.RecuperePhotosPourPersonneStyleVetement(personneId, styleId, vetementId).Select(p => p.Url).ToList();
-            else
-                UrlListe = this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Vetement, styleId).Select(p => p.Url).ToList();
+            if (vetementId > 0) lst = this._PhotoService.RecuperePhotosPourPersonneStyleVetement(personneId, styleId, vetementId).Select(p => p.Url);
+            else lst = this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Vetement, styleId).Select(p => p.Url);
+
+            UrlListe = (lst != null && lst.Count() > 0) ? lst.ToList() : new List<string>();
 
             if (UrlListe.Count > 0)
             {
@@ -149,7 +150,6 @@ namespace ConseilApp.Controllers
             }
 
             // Il faut gérer la limite du nombre de photo de vêtement par style
-
             return PartialView("_AffichePhoto", UrlListe);
         }
 
@@ -158,11 +158,12 @@ namespace ConseilApp.Controllers
         {
             int styleId = string.IsNullOrEmpty(style) ? 0 : Convert.ToInt32(style);
             if (styleId == 0) styleId = base.StyleEnCours;
-            List<string> UrlListe;
+            List<string> UrlListe = new List<string>();
 
             int personneId = !string.IsNullOrEmpty(personne) ? Convert.ToInt32(personne) : base.PersonneId;
 
-            UrlListe = this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Habille, styleId).Select(p => p.Url).ToList();
+            IEnumerable<string> lst = this._PhotoService.RecuperePhotosPourPersonneStyle(personneId, PhotoType.Habille, styleId).Select(p => p.Url);
+            if (lst != null && lst.Count() > 0) { UrlListe = lst.ToList(); }
 
             if (UrlListe.Count > 0)
             {

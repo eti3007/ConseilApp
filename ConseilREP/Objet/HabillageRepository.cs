@@ -85,6 +85,24 @@ namespace ConseilREP
             return result;
         }
 
+        public bool DeleteHabillage(int habillageId)
+        {
+            bool result = false;
+            using (var context = new ConseilEntitiesBis())
+            {
+                var habillage = context.Habillages.Where(h => h.Id.Equals(habillageId))
+                                                  .FirstOrDefault();
+                if (habillage != null)
+                {
+                    context.Habillages.Remove(habillage);
+                    context.Entry(habillage).State = EntityState.Deleted;
+                    context.SaveChanges();
+                    result = true;
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// Associe l'habillage à une liste de photo
         /// </summary>

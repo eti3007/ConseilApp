@@ -50,10 +50,12 @@ namespace ConseilBLL.Interfaces
         void AjoutePhotoVetement(int styleId, bool enAttente, int personneId, int vetementId, List<string> urlList);
         void AjoutePhotoHabillage(int styleId, int personneId, List<string> urlList);
         List<Photo> RecuperePhotosPourPersonneStyleVetement(int personneId, int styleId, int vetementId);
+        List<Photo> RecuperePhotosPourPersonneStyleTypeVetement(int personneId, int styleId, int typeVetementId);
         List<Photo> RecuperePhotosPourPersonneStyle(int personneId, PhotoType typePhoto, int styleId);
         bool SupprimePhotosParPersonneStyleVetement(int personneId, int styleId, int vetementId, string photoNom);
         bool SupprimePhotosHabillageParPersonneStyle(int personneId, int styleId, string photoNom);
         List<Photo> RecuperePhotosPourHabillage(int habillageId);
+        bool EstHabillageValide(List<int> photos);
     }
 
     public interface IVetementService
@@ -81,5 +83,6 @@ namespace ConseilBLL.Interfaces
         List<Habillage> RecupereHabillagePourConseil(int conseilId);
         int SauvegardeHabillage(int? habillageId, int conseilId, System.DateTime jour, short? note);
         int SauvegardePhotosHabillage(int habillageId, List<int> picsId);
+        bool SupprimeHabillage(int habillageId);
     }
 }

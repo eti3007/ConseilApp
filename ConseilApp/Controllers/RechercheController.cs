@@ -23,11 +23,6 @@ namespace ConseilApp.Controllers
             this._ConseilService = ConseilService;
         }
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
         [Authorize]
         public ActionResult Demandes()
         {

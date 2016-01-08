@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ConseilApp.Models.Habillage.ConseilItemModel>
+@{
+    bool conceptionHabillage = (bool)ViewBag.IsConception;
+}
+
+<table class="table table-striped table-bordered table-hover" id="tbEnCours">
+    <thead>
+        @if (conceptionHabillage)
+        {
+            <tr><td>Abonné</td><td>Date</td><td>Habillage réalisé</td></tr>
+        }
+        else
+        {
+            <tr><td>Conseiller</td><td>Date</td><td>Nombre de photo</td></tr>
+        }
+    </thead>
+    <tbody>
+        @foreach (var el in Model)
+        {
+            <tr class="row-Modal habillage" data-personne="@el.PersonneId" data-conseil="@el.Id" data-conception="@conceptionHabillage">
+                <td>@el.Pseudo</td>
+                <td>@el.Date</td>
+                <td>@el.NbHabillage</td>
+            </tr>
+        }
+    </tbody>
+</table>

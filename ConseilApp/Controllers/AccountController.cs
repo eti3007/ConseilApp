@@ -61,12 +61,22 @@ namespace ConseilApp.Controllers
             {
                 // Récupère les informations de la personne
                 Personne personne = this._PersonneService.RecuperePersonneConnecte(model.UserName);
-                // il faut récupérer le statut MAX de la personne pour déterminer si il a accès au menu "Mes Propositions" !
-                var lastStatut = personne.StatutHistoriques.OrderByDescending(c => c.TypeId).Select(c => new {c.StyleId, c.TypeId}).FirstOrDefault();
-                
-                base.RegisterPerson(personne.Id, personne.Pseudo, lastStatut.StyleId.ToString());
-                base.SetSession(SessionKey.ListeStyle, this._StyleService.RecupereListeDesStyles());
-                base.SetSession(SessionKey.PersonneStatut, lastStatut.TypeId);
+
+
+                if (personne.StatutHistoriques.Count > 0)
+                {
+
+                    // il faut récupérer le statut MAX de la personne pour déterminer si il a accès au menu "Mes Propositions" !
+                    var lastStatut = personne.StatutHistoriques.OrderByDescending(c => c.TypeId).Select(c => new { c.StyleId, c.TypeId }).FirstOrDefault();
+
+                    base.RegisterPerson(personne.Id, personne.Pseudo, lastStatut.StyleId.ToString());
+                    base.SetSession(SessionKey.ListeStyle, this._StyleService.RecupereListeDesStyles());
+                    base.SetSession(SessionKey.PersonneStatut, lastStatut.TypeId);
+                }
+                else {
+                    base.SetSession(SessionKey.ListeStyle, this._StyleService.RecupereListeDesStyles());
+                    base.SetSession(SessionKey.PersonneStatut, 1);
+                }
 
                 ViewBag.Connected = true;
 

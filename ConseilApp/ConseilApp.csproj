@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -224,7 +225,8 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CustomAccount\AccountViewModel.cs" />
     <Compile Include="Classes\FilesStatus.cs" />
-    <Compile Include="Models\Habillage\ConseilItem.cs" />
+    <Compile Include="Models\Habillage\ConceptionModel.cs" />
+    <Compile Include="Models\Habillage\ConseilItemModel.cs" />
     <Compile Include="Models\Notification\NotificationViewModel.cs" />
     <Compile Include="Models\Photo\PhotoViewModel.cs" />
     <Compile Include="Models\Recherche\RechercheModel.cs" />
@@ -333,6 +335,7 @@
     <Content Include="Images\Tests\IMG_0749.JPG" />
     <Content Include="Images\Tests\IMG_0750.JPG" />
     <Content Include="Scripts\Custom\Carousel.js" />
+    <Content Include="Scripts\Custom\Habillage.js" />
     <Content Include="Scripts\Custom\Menu.js" />
     <Content Include="Scripts\Custom\Notification.js" />
     <Content Include="Scripts\Custom\Recherche.js" />
@@ -408,12 +411,15 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_ModalView.cshtml" />
     <Content Include="Views\Notification\_AfficheNotification.cshtml" />
+    <Content Include="Views\Habillage\_CreerHabillage.cshtml" />
+    <Content Include="Views\Habillage\_VoirHabillage.cshtml" />
+    <Content Include="Views\Habillage\Habillages.cshtml" />
+    <Content Include="Views\Habillage\_AfficheTableau.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\Photo\Habillage\" />
     <Folder Include="Images\Photo\Vetement\" />
-    <Folder Include="Views\Habillage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

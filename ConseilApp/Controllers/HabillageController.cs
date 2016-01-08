@@ -18,38 +18,68 @@ namespace ConseilApp.Controllers
         }
 
         [Authorize]
+        public ActionResult Visualiser(int style, int personne)
+        {
+            ViewBag.Page = "Visualiser";
+            ViewBag.Title = "Visualiser les habillages";
+            ViewBag.Style = style;
+            ViewBag.Personne = personne;
+            ViewBag.IsConception = false;
+            var model = this._HabillageBuilder.RecupereConseil(style, personne, true);
+            return View(model);
+        }
+
+        [Authorize]
         public ActionResult Concevoir(int style, int personne)
         {
+            ViewBag.Page = "Concevoir";
+            ViewBag.Title = "Concevoir un habillage";
+            ViewBag.Style = style;
+            ViewBag.Personne = personne;
+            ViewBag.IsConception = true;
             var model = this._HabillageBuilder.RecupereConseil(style, personne, false);
             return View(model);
         }
 
         [Authorize]
-        public ActionResult Visualiser(int style, int personne)
+        public PartialViewResult ListeHabillage(int conseilId)
         {
-            var model = this._HabillageBuilder.RecupereConseil(style, personne, true);
-            return View(model);
+            // A - récupère la liste des habillages du conseil sélectionné
+
+            // B - récupère la liste complète des photos par habillage
+
+
+            return PartialView("_VoirHabillage");
         }
 
+        [Authorize]
+        public PartialViewResult ConcevoirHabillage(int conseilId, int style, int abonne)
+        {
+            Models.Habillage.ConceptionModel model = new Models.Habillage.ConceptionModel();
+            // A - récupère la liste des types de vêtement
+            model.typeVetementListe = this._HabillageBuilder.RecupereListeTypesVetement();
+
+            // B - récupère la liste des vêtements de l'abonné pour le style du conseil sélectionné
+            model.vetements = this._HabillageBuilder.RecupereAbonnePhotoVetementDispoParStyle(style, abonne);
+
+            return PartialView("_CreerHabillage", model);
+        }
 
         [Authorize]
-        public PartialViewResult ListeHabillage()
+        public PartialViewResult VisualiserHabillage(int conseilId)
         {
             return null;
         }
 
         [Authorize]
-        public PartialViewResult ConcevoirHabillage()
-        {
-            // A - Vérifie que les photos pour les types de vêtement obligatoire soient dans la liste
-            // A - Récupère l'ID des photos choisies
-            return null;
-        }
+        public void ClotureConseil(int conseilId) { }
 
         [Authorize]
-        public PartialViewResult VisualiserHabillage()
+        public PartialViewResult AfficheConseils(int style, int personne, bool isVisualisation)
         {
-            return null;
+            ViewBag.IsConception = !isVisualisation;
+            var model = this._HabillageBuilder.RecupereConseil(style, personne, isVisualisation);
+            return PartialView("_AfficheTableau", model);
         }
 
         [Authorize]

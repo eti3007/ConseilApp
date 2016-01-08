@@ -55,6 +55,7 @@ namespace ConseilApp.Helpers
             return new MvcHtmlString(table.ToString());
         }
 
+        /* PAS UTILISER  => A SUPPRIMER
         public static MvcHtmlString TableauVignette(this HtmlHelper htmlHelper, List<PhotoViewModel> listPhoto)
         {
             var table = new TagBuilder("table");
@@ -93,7 +94,7 @@ namespace ConseilApp.Helpers
 
             return new MvcHtmlString(table.ToString());
         }
-
+        */
         public static MvcHtmlString ModalShow(this HtmlHelper htmlHelper, string Name, string Title, string Body, bool large=false)
         {
             var divGlobal = new TagBuilder("div");
@@ -165,6 +166,7 @@ namespace ConseilApp.Helpers
             return new MvcHtmlString(hRef.ToString());
         }
 
+        /* PAS UTILISER  => A SUPPRIMER
         public static MvcHtmlString Carousel(this HtmlHelper htmlHelper, List<PhotoViewModel> list, string Name, int width = 0, int height = 0)
         {
             var divGlobal = new TagBuilder("div");
@@ -235,7 +237,7 @@ namespace ConseilApp.Helpers
 
             return new MvcHtmlString(divGlobal.ToString());
         }
-
+        */
         public static MvcHtmlString NotifItem(this HtmlHelper htmlHelper, NotificationViewModel notif)
         {
             var div = new TagBuilder("div");
